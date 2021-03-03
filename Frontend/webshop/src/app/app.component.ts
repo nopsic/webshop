@@ -2,9 +2,13 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `
+    <div><h1>{{pageTitle}}</h1>
+      <app-products></app-products>
+    </div>
+    `
 })
 
 export class AppComponent {
-  pageTitle = 'webshop';
+  pageTitle: string = 'webshop';
 }
