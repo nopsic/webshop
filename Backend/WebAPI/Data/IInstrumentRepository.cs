@@ -12,7 +12,7 @@ namespace WebAPI.Data
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveChangesAsync();
 
-        Task<Instrument[]> GetAllInstrumentAsync();
+        Task<Instrument[]> GetAllInstrumentsAsync();
         Task<Instrument> GetInstrumentAsync(string name);
     }
 }

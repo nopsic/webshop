@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
 using WebAPI.Data;
 
 namespace WebAPI
@@ -14,6 +15,8 @@ namespace WebAPI
         {
             services.AddDbContext<InstrumentContext>();
             services.AddScoped<IInstrumentRepository, InstrumentRepository>();
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddControllers();
         }

@@ -30,7 +30,7 @@ namespace WebAPI.Data
             _context.Remove(entity);
         }
 
-        public async Task<Instrument[]> GetAllInstrumentAsync()
+        public async Task<Instrument[]> GetAllInstrumentsAsync()
         {
             _logger.LogInformation($"Getting all Instruments");
 
@@ -41,14 +41,14 @@ namespace WebAPI.Data
             return await query.ToArrayAsync();
         }
 
-        public async Task<Instrument> GetInstrumentAsync(string name)
+        public async Task<Instrument> GetInstrumentAsync(string code)
         {
-            _logger.LogInformation($"Getting an Instrument with name: {name}");
+            _logger.LogInformation($"Getting an Instrument with name: {code}");
 
             IQueryable<Instrument> query = _context.Instruments;
 
             // Query It
-            query = query.Where(c => c.Name == name);
+            query = query.Where(c => c.Code == code);
 
             return await query.FirstOrDefaultAsync();
         }
