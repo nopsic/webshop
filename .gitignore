@@ -365,3 +365,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp
+Backend/WebAPI/.vs/WebAPI/v16/.suo
