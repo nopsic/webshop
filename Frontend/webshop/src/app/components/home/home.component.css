@@ -1,11 +1,23 @@
-.example-card {
-  max-width: 400px;
+.card {
   position: relative;
-  top: 20px;
-  left: 770px;
+  width: auto;
+  text-align: center;
+  background-color:goldenrod ;
+  border: none;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.content {
+  position: relative;
+  bottom: 180px;
+  text-align: center;
+  color:chocolate;
+  background-color: papayawhip;
+  
+}
+
+.image {
+  top: 20px;
+  position: relative;
+  border-radius: 50%;
+  max-width: 1350px;
 }

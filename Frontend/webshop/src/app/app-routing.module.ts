@@ -7,7 +7,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'aboutus', component: ProductListComponent },
-  { path: 'signup', component: ProductListComponent }
+  { path: 'signup', component: ProductListComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  //{ path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -16,5 +18,5 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule {
-  
+
 }
