@@ -14,5 +14,7 @@ namespace WebAPI.Data.Entities
         public string Description { get; set; }
         public double Rating { get; set; }
         public int Quantity { get; set; }
+        public string PictureName { get; set; }
+        public string Type { get; set; }
     }
 }
