@@ -366,3 +366,15 @@ FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp
 Backend/WebAPI/.vs/WebAPI/v16/.suo
+Backend/WebAPI/bin/Debug/net5.0/WebAPI.pdb
+Backend/WebAPI/bin/Debug/net5.0/WebAPI.exe
+Backend/WebAPI/bin/Debug/net5.0/WebAPI.dll
+Backend/WebAPI/bin/Debug/net5.0/ref/WebAPI.dll
+Backend/WebAPI/obj/WebAPI.csproj.nuget.dgspec.json
+Backend/WebAPI/obj/project.nuget.cache
+Backend/WebAPI/obj/project.assets.json
+Backend/WebAPI/obj/Debug/net5.0/WebAPI.pdb
+Backend/WebAPI/obj/Debug/net5.0/WebAPI.dll
+Backend/WebAPI/obj/Debug/net5.0/WebAPI.csprojAssemblyReference.cache
+Backend/WebAPI/obj/Debug/net5.0/WebAPI.csproj.CoreCompileInputs.cache
+Backend/WebAPI/obj/Debug/net5.0/ref/WebAPI.dll
