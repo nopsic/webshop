@@ -34,19 +34,20 @@
             </tr>
           </thead>
           <tbody>
+            <app-progress-spinner [isContentProgress]="true"></app-progress-spinner>
             <tr *ngFor='let product of filteredProducts'>
               <td>
                 <img *ngIf='showImage'
-                [src]='product.imageUrl'
+                [src]='product.pictureName'
                 [title]='product.productName'
                 [style.width.px]='imageWidth'
                 [style.margin.px]='imageMargin'>
               </td>
-              <td>{{product.productName}}</td>
-              <td>{{product.productCode | lowercase}}</td>
-              <td>{{product.releaseDate}}</td>
+              <td>{{product.name}}</td>
+              <td>{{product.code | lowercase}}</td>
+              <td>{{product.description}}</td>
               <td>{{product.price | currency:'HUF':'symbol':'1.2-2'}}</td>
-              <td><app-star [rating]='product.starRating'>
+              <td><app-star [rating]='product.rating'>
               </app-star></td>
             </tr>
           </tbody>

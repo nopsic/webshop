@@ -1,0 +1,53 @@
+.card {
+  position: relative;
+  width: auto;
+  background-color:goldenrod ;
+  border: none;
+}
+
+.title {
+  text-align: left;
+  color: rgb(15, 110, 199);
+}
+
+.form-field {
+  width: 200px;
+  color: rgb(0, 0, 0);
+  font-size: large;
+}
+
+.tabs {
+  background-color: rgb(209, 128, 51);
+}
+
+table {
+  width: 100%;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.progress-bar {
+  background-color:whitesmoke;
+  width: 100%;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.radio-button {
+  margin: 5px;
+}
+
+.filter {
+  padding: 10px;
+}

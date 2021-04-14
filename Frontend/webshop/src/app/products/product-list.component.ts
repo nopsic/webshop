@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Subscription } from "rxjs";
 import { IProduct } from "../components/product/product";
+import { ProgressSpinnerComponent } from "../components/shared/progress-spinner/progress-spinner.component";
 import { ProductService } from "../services/product.service";
 
 @Component({
@@ -10,12 +12,16 @@ import { ProductService } from "../services/product.service";
     ]
 })
 
-export class ProductListComponent implements OnInit{
+export class ProductListComponent implements OnInit, OnDestroy{
+  @ViewChild(ProgressSpinnerComponent, { static: true }) Progress: ProgressSpinnerComponent;
+
   pageTitle: string = 'List of musical instruments';
   imageWidth: number = 50;
   imageMargin: number = 2;
   showImage: boolean = false;
   errorMessage: string = '';
+  sub!: Subscription;
+  spinner: ProgressSpinnerComponent = new ProgressSpinnerComponent();
   
   
   private _listFilter: string = '';
@@ -36,7 +42,7 @@ export class ProductListComponent implements OnInit{
   performFilter(filterBy: string) : IProduct[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.products.filter((product: IProduct) =>
-      product.productName.toLocaleLowerCase().includes(filterBy));
+      product.name.toLocaleLowerCase().includes(filterBy));
   }
 
   toggleImage(): void {
@@ -44,12 +50,16 @@ export class ProductListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe({
+    this.sub = this.productService.getProducts().subscribe({
       next: products => {
         this.products = products;
         this.filteredProducts = this.products;
       },
       error: err => this.errorMessage
     });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

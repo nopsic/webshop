@@ -1,25 +1,60 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from "@angular/forms";
-
-import { AppComponent } from './app.component';
-import { ProductListComponent } from './products/product-list.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StarComponent } from './shared/star.component';
-import { HeaderComponent } from './components/shared/header/header.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
-//import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { MatSidenavModule } from '@angular/material/sidenav'; 
-import { NavComponent } from './components/shared/nav/nav.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeComponent } from './components/home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSliderModule } from '@angular/material/slider'; 
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTableFilterModule } from 'mat-table-filter';
+
+import { AppComponent } from './app.component';
+import { ProductListComponent } from './products/product-list.component';
+import { StarComponent } from './shared/star.component';
+import { HeaderComponent } from './components/shared/header/header.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
+//import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { NavComponent } from './components/shared/nav/nav.component';
+import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
+import { ProgressSpinnerComponent } from './components/shared/progress-spinner/progress-spinner.component';
+import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
+
+const MaterialComponents = [
+  MatSidenavModule,
+  MatMenuModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatProgressSpinnerModule,
+  MatInputModule,
+  MatTabsModule,
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatSliderModule,
+  MatProgressBarModule,
+  MatRadioModule,
+  MatTableFilterModule
+]
 
 @NgModule({
   declarations: [
@@ -31,20 +66,18 @@ import { ProductComponent } from './components/product/product.component';
     NavComponent,
     //ShoppingCartComponent,
     HomeComponent,
-    ProductComponent
+    ProductComponent,
+    ProgressSpinnerComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
+    MaterialComponents,
     AppRoutingModule,
-    MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

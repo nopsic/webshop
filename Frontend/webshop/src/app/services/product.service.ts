@@ -25,10 +25,10 @@ export class ProductService {
   // Get one product
   // Since we are working with a json file, we can only retrieve all products
   // So retrieve all products and then find the one we want using 'map'
-  getProduct(id: number): Observable<IProduct | undefined> {
+  getProduct(code: string): Observable<IProduct | undefined> {
     return this.getProducts()
       .pipe(
-        map((products: IProduct[]) => products.find(p => p.productId === id))
+        map((products: IProduct[]) => products.find(p => p.code === code))
       );
   }
 
