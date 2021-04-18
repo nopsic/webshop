@@ -110,4 +110,87 @@ export class ProductComponent implements OnInit {
 
     return false;
   }
+
+  tabClick(tab) {
+    console.log(tab.index);
+    this.getProductsBySelectedTab(tab.index);
+  }
+
+  getProductsBySelectedTab(tabIndex: number) {
+    if(tabIndex == 0) {
+      this.showMatProgress = true;
+      this.sub = this.productService.getProducts().subscribe({
+        next: products => {
+          this.products = products;
+          this.dataSource = new MatTableDataSource(this.products);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.filterEntity = new Product();
+          this.filterType = MatTableFilter.ANYWHERE;
+          this.showMatProgress = false;
+        },
+        error: err => this.errorMessage
+      });
+    }
+    else if(tabIndex == 1) {
+      this.showMatProgress = true;
+      this.sub = this.productService.getProductsByType("brass").subscribe({
+        next: products => {
+          this.products = products;
+          this.dataSource = new MatTableDataSource(this.products);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.filterEntity = new Product();
+          this.filterType = MatTableFilter.ANYWHERE;
+          this.showMatProgress = false;
+        },
+        error: err => this.errorMessage
+      });
+    }
+    else if(tabIndex == 2) {
+      this.showMatProgress = true;
+      this.sub = this.productService.getProductsByType("woodwind").subscribe({
+        next: products => {
+          this.products = products;
+          this.dataSource = new MatTableDataSource(this.products);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.filterEntity = new Product();
+          this.filterType = MatTableFilter.ANYWHERE;
+          this.showMatProgress = false;
+        },
+        error: err => this.errorMessage
+      });
+    }
+    else if(tabIndex == 3) {
+      this.showMatProgress = true;
+      this.sub = this.productService.getProductsByType("percussion").subscribe({
+        next: products => {
+          this.products = products;
+          this.dataSource = new MatTableDataSource(this.products);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.filterEntity = new Product();
+          this.filterType = MatTableFilter.ANYWHERE;
+          this.showMatProgress = false;
+        },
+        error: err => this.errorMessage
+      });
+    }
+    else if(tabIndex == 4) {
+      this.showMatProgress = true;
+      this.sub = this.productService.getProductsByType("string").subscribe({
+        next: products => {
+          this.products = products;
+          this.dataSource = new MatTableDataSource(this.products);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.filterEntity = new Product();
+          this.filterType = MatTableFilter.ANYWHERE;
+          this.showMatProgress = false;
+        },
+        error: err => this.errorMessage
+      });
+    }
+  }
 }
