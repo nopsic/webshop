@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing;
 using System;
 using System.Threading.Tasks;
 using WebAPI.Data;
+using WebAPI.Data.Entities;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -39,8 +40,8 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("{code}")]
-        public async Task<ActionResult<InstrumentModel>> Get(string code)
+        [HttpGet("code/{code}")]
+        public async Task<ActionResult<InstrumentModel>> GetByCode(string code)
         {
             try
             {
@@ -57,6 +58,93 @@ namespace WebAPI.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
             }
+        }
+
+        [HttpGet("{type}")]
+        public async Task<ActionResult<InstrumentModel[]>> GetByType(string type)
+        {
+            try
+            {
+                var result = await _repository.GetInstrumentsByTypeAsync(type);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return _mapper.Map<InstrumentModel[]>(result);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<InstrumentModel>> Post(InstrumentModel model)
+        {
+            try
+            {
+                var existing = await _repository.GetInstrumentAsync(model.Code);
+                if (existing != null)
+                {
+                    return BadRequest("Code in use");
+                }
+
+                var location = _linkGenerator.GetPathByAction("Get",
+                    "Instruments",
+                    new { code = model.Code });
+
+                if (string.IsNullOrWhiteSpace(location))
+                {
+                    return BadRequest("Could not use current name");
+                }
+
+                var instrument = _mapper.Map<Instrument>(model);
+                _repository.Add(instrument);
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Created("", _mapper.Map<InstrumentModel>(instrument));
+                }
+
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to get the Instrument");
+            }
+
+            return BadRequest();
+        }
+
+        [HttpDelete("{code}")]
+        public async Task<IActionResult> Delete(string code)
+        {
+            try
+            {
+                var instrumentToDelete = await _repository.GetInstrumentAsync(code);
+                if (instrumentToDelete == null)
+                {
+                    return NotFound("Failed to find the instrument to delete");
+                }
+
+                _repository.Delete(instrumentToDelete);
+
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Failed to delete instrument");
+                }
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
+
+            return BadRequest("Failed to delete the instrument");
         }
     }
 }

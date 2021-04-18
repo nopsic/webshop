@@ -53,6 +53,20 @@ namespace WebAPI.Data
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<Instrument[]> GetInstrumentsByTypeAsync(string type)
+        {
+            _logger.LogInformation($"Getting an Instruments by type: {type}");
+
+            IQueryable<Instrument> query = _context.Instruments;
+
+            // Query It
+            query = query.Where(c => c.Type == type);
+            // Order It
+            query = query.OrderBy(c => c.Name);
+
+            return await query.ToArrayAsync();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             _logger.LogInformation($"Attempitng to save the changes in the context");

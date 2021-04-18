@@ -32,7 +32,7 @@ namespace WebAPI.Data
                   Description = "One of the best musical instruments ever.",
                   Rating = 5.0,
                   Quantity = 3,
-                  PictureName = "french_horn.png",
+                  PictureName = "assets/images/french_horn.png",
                   Type = "brass"
               });
             bldr.Entity<Instrument>()
@@ -45,7 +45,7 @@ namespace WebAPI.Data
                   Description = "Everybody knows what trumpet looks like.",
                   Rating = 4.2,
                   Quantity = 6,
-                  PictureName = "trumpet.jpg",
+                  PictureName = "assets/images/trumpet.jpg",
                   Type = "brass"
               });
             bldr.Entity<Instrument>()
@@ -58,7 +58,7 @@ namespace WebAPI.Data
                   Description = "Tuba is Tuba.",
                   Rating = 4.1,
                   Quantity = 2,
-                  PictureName = "tuba.jpg",
+                  PictureName = "assets/images/tuba.jpg",
                   Type = "brass"
               });
             bldr.Entity<Instrument>()
@@ -71,7 +71,7 @@ namespace WebAPI.Data
                   Description = "When mom isn't home meme.",
                   Rating = 4.6,
                   Quantity = 5,
-                  PictureName = "trombone.jpg",
+                  PictureName = "assets/images/trombone.jpg",
                   Type = "brass"
               });
             bldr.Entity<Instrument>()
@@ -84,7 +84,7 @@ namespace WebAPI.Data
                   Description = "A valved brass musical instrument like a cornet but with a mellower tone.",
                   Rating = 3.7,
                   Quantity = 5,
-                  PictureName = "flugelhorn.jpg",
+                  PictureName = "assets/images/flugelhorn.jpg",
                   Type = "brass"
               });
             bldr.Entity<Instrument>()
@@ -97,7 +97,7 @@ namespace WebAPI.Data
                   Description = "Every girl want to play this instrument.",
                   Rating = 3.9,
                   Quantity = 12,
-                  PictureName = "flute.jpg",
+                  PictureName = "assets/images/flute.jpg",
                   Type = "woodwind"
               });
             bldr.Entity<Instrument>()
@@ -110,7 +110,7 @@ namespace WebAPI.Data
                   Description = "Epic sax guy.",
                   Rating = 4.4,
                   Quantity = 9,
-                  PictureName = "alto_saxophone.jpg",
+                  PictureName = "assets/images/alto_saxophone.jpg",
                   Type = "woodwind"
               });
             bldr.Entity<Instrument>()
@@ -123,7 +123,7 @@ namespace WebAPI.Data
                   Description = "Squid had this instrument in SpongeBob.",
                   Rating = 4.3,
                   Quantity = 17,
-                  PictureName = "clarinet.png",
+                  PictureName = "assets/images/clarinet.png",
                   Type = "woodwind"
               });
             bldr.Entity<Instrument>()
@@ -136,7 +136,7 @@ namespace WebAPI.Data
                   Description = "A big windwood musical instrument.",
                   Rating = 2.5,
                   Quantity = 1,
-                  PictureName = "bassoon.jpg",
+                  PictureName = "assets/images/bassoon.jpg",
                   Type = "woodwind"
               });
             bldr.Entity<Instrument>()
@@ -149,7 +149,7 @@ namespace WebAPI.Data
                   Description = "Side drum.",
                   Rating = 4.0,
                   Quantity = 4,
-                  PictureName = "leaf_rake.png",
+                  PictureName = "assets/images/leaf_rake.png",
                   Type = "percussion"
               });
             bldr.Entity<Instrument>()
@@ -162,7 +162,7 @@ namespace WebAPI.Data
                   Description = "Bass drum.",
                   Rating = 3.7,
                   Quantity = 2,
-                  PictureName = "leaf_rake.png",
+                  PictureName = "assets/images/leaf_rake.png",
                   Type = "percussion"
               });
             bldr.Entity<Instrument>()
@@ -175,7 +175,7 @@ namespace WebAPI.Data
                   Description = "Classical piano.",
                   Rating = 4.6,
                   Quantity = 1,
-                  PictureName = "leaf_rake.png",
+                  PictureName = "assets/images/leaf_rake.png",
                   Type = "percussion"
               });
             bldr.Entity<Instrument>()
@@ -188,7 +188,7 @@ namespace WebAPI.Data
                   Description = "Xylophone.",
                   Rating = 3.3,
                   Quantity = 1,
-                  PictureName = "leaf_rake.png",
+                  PictureName = "assets/images/leaf_rake.png",
                   Type = "percussion"
               });
             bldr.Entity<Instrument>()
@@ -201,7 +201,7 @@ namespace WebAPI.Data
                   Description = "Violin.",
                   Rating = 4.3,
                   Quantity = 11,
-                  PictureName = "leaf_rake.png",
+                  PictureName = "assets/images/leaf_rake.png",
                   Type = "string"
               });
             bldr.Entity<Instrument>()
@@ -214,7 +214,7 @@ namespace WebAPI.Data
                   Description = "Classical guitar, ideal for learning how to play the guitar.",
                   Rating = 4.6,
                   Quantity = 4,
-                  PictureName = "leaf_rake.png",
+                  PictureName = "assets/images/leaf_rake.png",
                   Type = "string"
               });
             bldr.Entity<Instrument>()
@@ -227,7 +227,7 @@ namespace WebAPI.Data
                   Description = "Electric guitar is a best choice to play hard rock.",
                   Rating = 4.7,
                   Quantity = 3,
-                  PictureName = "leaf_rake.png",
+                  PictureName = "assets/images/leaf_rake.png",
                   Type = "string"
               });
         }

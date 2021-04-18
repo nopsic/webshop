@@ -13,6 +13,7 @@ namespace WebAPI.Data
         Task<bool> SaveChangesAsync();
 
         Task<Instrument[]> GetAllInstrumentsAsync();
-        Task<Instrument> GetInstrumentAsync(string name);
+        Task<Instrument> GetInstrumentAsync(string code);
+        Task<Instrument[]> GetInstrumentsByTypeAsync(string type);
     }
 }
