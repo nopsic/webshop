@@ -1,5 +1,5 @@
 <div class='card'>
-  <div class='card-header'>
+  <div class='card-header' *ngIf="!showMatProgress && product?.name !== null">
     {{pageTitle + ': ' + product?.name}}
   </div>
 
@@ -13,7 +13,7 @@
         </div>
         <div class='row'>
           <div class='col-md-4'>Code:</div>
-          <div class='col-md-8'>{{product.code | lowercase}}</div>
+          <div class='col-md-8'>{{product.code}}</div>
         </div>
         <div class='row'>
           <div class='col-md-4'>Description:</div>
@@ -34,6 +34,10 @@
             </app-star>
           </div>
         </div>
+        <div class='row'>
+          <div class='col-md-4'>Quantity:</div>
+          <div class='col-md-8'>{{product.quantity}}</div>
+        </div>
       </div>
 
       <div class='col-md-4'>
@@ -44,12 +48,39 @@
              [title]='product.name'>
       </div>
     </div>
+    <div>
+      <button class="icon-minus" mat-mini-fab (click)="minusOne()">
+        <mat-icon>exposure_neg_1</mat-icon>
+      </button>
+      <mat-form-field class="quantity-from-field" appearance="fill">
+        <mat-label>Quantity</mat-label>
+        <md-input-container>
+          <input class="quantity-input" matInput type="number" min="1" [max]="product.quantity" [formControl]="quantityControl" hideRequiredMarker>
+        </md-input-container>
+        <mat-error *ngIf="quantityControl.invalid">
+            The quantity must be between 1 and {{product.quantity}}.
+        </mat-error>
+      </mat-form-field>
+      <button class="icon-plus" mat-mini-fab color="primary" (click)="plusOne()">
+        <mat-icon>exposure_plus_1</mat-icon>
+      </button>
+      <button class="add-to-chart" mat-raised-button (click)="addToChart()" [disabled]="!quantityControl.valid">Add to chart</button>
+    </div>
+  </div>
+
+  <div>
+    <mat-card class="progress-bar" *ngIf="product?.name === null">
+      <mat-card-content>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <div class='card-footer'>
-    <button class='btn btn-outline-secondary'
+    <button  class='btn btn-outline-secondary'
             style='width:80px'
-            (click)='onBack()'>
+            (click)='onBack()'
+            mat-raised-button>
       <i class='fa fa-chevron-left'></i> Back
     </button>
   </div>

@@ -7,4 +7,5 @@ export interface IProduct {
   rating: number;
   pictureName: string;
   type: string;
+  quantity: number;
 }

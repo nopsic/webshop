@@ -40,7 +40,8 @@ export class ProductComponent implements OnInit {
     description: '',
     rating: 0,
     pictureName: '',
-    type: ''
+    type: '',
+    quantity: 0
   };
 
 

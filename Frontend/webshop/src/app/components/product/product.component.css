@@ -1,13 +1,13 @@
 .card {
   position: relative;
   width: auto;
-  background-color:goldenrod ;
+  background-color:goldenrod;
   border: none;
 }
 
 .title {
   text-align: left;
-  color: rgb(15, 110, 199);
+  color: rgb(110, 49, 5);
 }
 
 .form-field {
@@ -17,11 +17,13 @@
 }
 
 .tabs {
-  background-color: rgb(209, 128, 51);
+  background-color:wheat;
 }
 
 table {
   width: 100%;
+  background-color:whitesmoke;
+  font-weight: 500;
 }
 
 img {
@@ -38,6 +40,10 @@ th.mat-sort-header-sorted {
   width: 100%;
 }
 
+.paginator {
+  background-color:wheat;
+}
+
 .radio-group {
   display: flex;
   flex-direction: column;
@@ -50,4 +56,12 @@ th.mat-sort-header-sorted {
 
 .filter {
   padding: 10px;
+}
+
+a {
+  color: rgb(121, 20, 20);
+}
+
+.paginator {
+  background-color:wheat;
 }

@@ -1,0 +1,35 @@
+.quantity-from-field {
+  width: 150px;
+  padding: 10px;
+}
+
+.add-to-chart {
+  text-align: center;
+  left: 40px;
+  background-color: rgb(19, 202, 156);
+}
+
+.quantity-input {
+  text-align: center;
+}
+
+.icon-minus {
+  bottom: 5px;
+  background-color: rgb(185, 175, 62);
+}
+
+.icon-plus {
+  bottom: 5px;
+  background-color: rgb(54, 143, 36);
+}
+
+.card-body {
+  background-color: wheat;
+  color: rgb(80, 28, 28);
+  font-weight: 500;
+}
+
+.card {
+  background-color: goldenrod;
+  font-weight: 500;
+}
