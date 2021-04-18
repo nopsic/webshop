@@ -378,3 +378,7 @@ Backend/WebAPI/obj/Debug/net5.0/WebAPI.dll
 Backend/WebAPI/obj/Debug/net5.0/WebAPI.csprojAssemblyReference.cache
 Backend/WebAPI/obj/Debug/net5.0/WebAPI.csproj.CoreCompileInputs.cache
 Backend/WebAPI/obj/Debug/net5.0/ref/WebAPI.dll
+
+*.dll
+*.cache
+*.exe
