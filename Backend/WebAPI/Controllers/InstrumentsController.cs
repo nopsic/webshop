@@ -143,8 +143,6 @@ namespace WebAPI.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
             }
-
-            return BadRequest("Failed to delete the instrument");
         }
     }
 }
