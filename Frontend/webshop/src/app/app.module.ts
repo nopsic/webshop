@@ -24,15 +24,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTableFilterModule } from 'mat-table-filter';
 
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './products/product-list.component';
 import { StarComponent } from './shared/star.component';
-import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 //import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { NavComponent } from './components/shared/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
-import { ProgressSpinnerComponent } from './components/shared/progress-spinner/progress-spinner.component';
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
 
 const MaterialComponents = [
@@ -59,15 +56,12 @@ const MaterialComponents = [
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent,
     StarComponent,
-    HeaderComponent,
     FooterComponent,
     NavComponent,
     //ShoppingCartComponent,
     HomeComponent,
     ProductComponent,
-    ProgressSpinnerComponent,
     ProductDetailComponent
   ],
   imports: [
