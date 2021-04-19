@@ -28,7 +28,16 @@ export class ProductService {
   getProduct(code: string): Observable<IProduct | undefined> {
     return this.getProducts()
       .pipe(
-        map((products: IProduct[]) => products.find(p => p.code === code))
+        map((products: IProduct[]) => products.find(p => p.code === code)),
+        catchError(this.handleError)
+      );
+  }
+
+  getProductsByType(type: string) {
+    return this.http.get<IProduct[]>(`${environment.apiURL}` + `${this.productUrl}` + '/' + type)
+      .pipe(
+        tap(data => console.log('All: ' + JSON.stringify(data))),
+        catchError(this.handleError)
       );
   }
 
