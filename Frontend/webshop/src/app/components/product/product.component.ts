@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IProduct } from './product';
 import { ProductService } from "../../services/product.service";
@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit {
 
 
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
 
   filterEntity: Product = {    
     instrumentId: '',
@@ -74,7 +74,7 @@ export class ProductComponent implements OnInit {
       next: products => {
         this.products = products;
         this.dataSource = new MatTableDataSource(this.products);
-        this.dataSource.paginator = this.paginator;
+        this.dataSource.paginator = this.paginator.toArray()[0];
         this.dataSource.sort = this.sort;
         this.filterEntity = new Product();
         this.filterType = MatTableFilter.ANYWHERE;
@@ -114,7 +114,7 @@ export class ProductComponent implements OnInit {
         next: products => {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
-          this.dataSource.paginator = this.paginator;
+          this.dataSource.paginator = this.paginator.toArray()[0];
           this.dataSource.sort = this.sort;
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
@@ -129,7 +129,7 @@ export class ProductComponent implements OnInit {
         next: products => {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
-          this.dataSource.paginator = this.paginator;
+          this.dataSource.paginator = this.paginator.toArray()[1];
           this.dataSource.sort = this.sort;
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
@@ -144,7 +144,7 @@ export class ProductComponent implements OnInit {
         next: products => {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
-          this.dataSource.paginator = this.paginator;
+          this.dataSource.paginator = this.paginator.toArray()[2];
           this.dataSource.sort = this.sort;
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
@@ -159,7 +159,7 @@ export class ProductComponent implements OnInit {
         next: products => {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
-          this.dataSource.paginator = this.paginator;
+          this.dataSource.paginator = this.paginator.toArray()[3];
           this.dataSource.sort = this.sort;
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
@@ -174,7 +174,7 @@ export class ProductComponent implements OnInit {
         next: products => {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
-          this.dataSource.paginator = this.paginator;
+          this.dataSource.paginator = this.paginator.toArray()[4];
           this.dataSource.sort = this.sort;
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
