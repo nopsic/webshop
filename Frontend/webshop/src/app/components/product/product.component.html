@@ -24,10 +24,10 @@
       </button>
     </mat-form-field>
 
-    <mat-tab-group class="tabs" #tabRef (selectedTabChange)="tabClick($event)" matSort>
+    <mat-tab-group class="tabs" #tabRef (selectedTabChange)="tabClick($event)">
       <mat-tab label="All type">
         <div class="mat-elevation-z8">
-          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType">
+          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType" matSort>
             <!-- Image Column --> 
             <ng-container matColumnDef="pictureName">
               <th mat-header-cell *matHeaderCellDef id="image">Image</th>
@@ -71,7 +71,7 @@
 
       <mat-tab label="Brass">
         <div class="mat-elevation-z8">
-          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType">
+          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType" matSort>
             <!-- Image Column --> 
             <ng-container matColumnDef="pictureName">
               <th mat-header-cell *matHeaderCellDef id="image">Image</th>
@@ -115,7 +115,7 @@
 
       <mat-tab label="Woodwind">
         <div class="mat-elevation-z8">
-          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType">
+          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType" matSort>
             <!-- Image Column --> 
             <ng-container matColumnDef="pictureName">
               <th mat-header-cell *matHeaderCellDef id="image">Image</th>
@@ -159,7 +159,7 @@
 
       <mat-tab label="Percussion">
         <div class="mat-elevation-z8">
-          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType">
+          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType" matSort>
             <!-- Image Column --> 
             <ng-container matColumnDef="pictureName">
               <th mat-header-cell *matHeaderCellDef id="image">Image</th>
@@ -203,7 +203,7 @@
 
       <mat-tab label="String">
         <div class="mat-elevation-z8">
-          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType">
+          <table mat-table matTableFilter [dataSource]="dataSource" [exampleEntity]="filterEntity"  [filterType]="filterType" matSort>
             <!-- Image Column --> 
             <ng-container matColumnDef="pictureName">
               <th mat-header-cell *matHeaderCellDef id="image">Image</th>

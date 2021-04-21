@@ -45,7 +45,7 @@ export class ProductComponent implements OnInit {
   };
 
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChildren(MatSort) sort = new QueryList<MatSort>();
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
 
   filterEntity: Product = {    
@@ -75,7 +75,7 @@ export class ProductComponent implements OnInit {
         this.products = products;
         this.dataSource = new MatTableDataSource(this.products);
         this.dataSource.paginator = this.paginator.toArray()[0];
-        this.dataSource.sort = this.sort;
+        this.dataSource.sort = this.sort.toArray()[0];
         this.filterEntity = new Product();
         this.filterType = MatTableFilter.ANYWHERE;
         this.showMatProgress = false;
@@ -115,7 +115,7 @@ export class ProductComponent implements OnInit {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
           this.dataSource.paginator = this.paginator.toArray()[0];
-          this.dataSource.sort = this.sort;
+          this.dataSource.sort = this.sort.toArray()[0];
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
@@ -130,7 +130,7 @@ export class ProductComponent implements OnInit {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
           this.dataSource.paginator = this.paginator.toArray()[1];
-          this.dataSource.sort = this.sort;
+          this.dataSource.sort = this.sort.toArray()[1];
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
@@ -145,7 +145,7 @@ export class ProductComponent implements OnInit {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
           this.dataSource.paginator = this.paginator.toArray()[2];
-          this.dataSource.sort = this.sort;
+          this.dataSource.sort = this.sort.toArray()[2];
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
@@ -160,7 +160,7 @@ export class ProductComponent implements OnInit {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
           this.dataSource.paginator = this.paginator.toArray()[3];
-          this.dataSource.sort = this.sort;
+          this.dataSource.sort = this.sort.toArray()[3];
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
@@ -175,7 +175,7 @@ export class ProductComponent implements OnInit {
           this.products = products;
           this.dataSource = new MatTableDataSource(this.products);
           this.dataSource.paginator = this.paginator.toArray()[4];
-          this.dataSource.sort = this.sort;
+          this.dataSource.sort = this.sort.toArray()[4];
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
