@@ -22,6 +22,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableFilterModule } from 'mat-table-filter';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog'; 
 
 import { AppComponent } from './app.component';
 import { StarComponent } from './shared/star.component';
@@ -31,6 +33,10 @@ import { NavComponent } from './components/shared/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { OrderComponent } from './components/order/order.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { LoginComponent } from './components/login/login.component';
 
 const MaterialComponents = [
   MatSidenavModule,
@@ -50,7 +56,9 @@ const MaterialComponents = [
   MatSliderModule,
   MatProgressBarModule,
   MatRadioModule,
-  MatTableFilterModule
+  MatTableFilterModule,
+  MatStepperModule,
+  MatDialogModule
 ]
 
 @NgModule({
@@ -62,8 +70,13 @@ const MaterialComponents = [
     //ShoppingCartComponent,
     HomeComponent,
     ProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    RegistrationComponent,
+    OrderComponent,
+    DialogComponent,
+    LoginComponent
   ],
+  entryComponents: [DialogComponent],
   imports: [
     BrowserModule,
     FormsModule,

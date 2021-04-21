@@ -96,14 +96,6 @@ export class ProductComponent implements OnInit {
     console.log(row);
   }
 
-  formatLabel(value: number) {
-    if (value >= 1000) {
-      return Math.round(value / 1000) + 'k';
-    }
-
-    return value;
-  }
-
   showProductTable(): boolean {
     if (this.products && this.products.length > 0) {
       return true;
