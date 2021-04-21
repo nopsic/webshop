@@ -84,11 +84,9 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  //(keyup)="applyFilter($event.target.value)"
-
   applyFilter(filterValue: string): void {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 
