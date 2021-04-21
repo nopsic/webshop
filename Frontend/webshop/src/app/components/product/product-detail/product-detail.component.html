@@ -49,19 +49,20 @@
       </div>
     </div>
     <div>
-      <button class="icon-minus" mat-mini-fab (click)="minusOne()">
+      <button class="icon-minus" mat-mini-fab (click)="minusOne()" [disabled]="quantityInput < 2">
         <mat-icon>exposure_neg_1</mat-icon>
       </button>
       <mat-form-field class="quantity-from-field" appearance="fill">
         <mat-label>Quantity</mat-label>
         <md-input-container>
-          <input class="quantity-input" matInput type="number" min="1" [max]="product.quantity" [formControl]="quantityControl" hideRequiredMarker>
+          <input class="quantity-input" matInput type="number" min="1" [max]="product.quantity" [formControl]="quantityControl" hideRequiredMarker
+          (input)="onDataChange($event.target.value)">
         </md-input-container>
         <mat-error *ngIf="quantityControl.invalid">
             The quantity must be between 1 and {{product.quantity}}.
         </mat-error>
       </mat-form-field>
-      <button class="icon-plus" mat-mini-fab color="primary" (click)="plusOne()">
+      <button class="icon-plus" mat-mini-fab color="primary" (click)="plusOne()" [disabled]="quantityInput >= product.quantity">
         <mat-icon>exposure_plus_1</mat-icon>
       </button>
       <button class="add-to-chart" mat-raised-button (click)="addToChart()" [disabled]="!quantityControl.valid">Add to chart</button>

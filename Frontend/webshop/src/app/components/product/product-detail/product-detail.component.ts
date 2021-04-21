@@ -49,14 +49,14 @@ export class ProductDetailComponent implements OnInit {
 
   minusOne() {
     if (this.quantityInput > 1) {
-      this.quantityInput = this.quantityInput - 1;
+      this.quantityInput--;
       this.quantityControl.setValue(this.quantityInput);
     }
   }
 
   plusOne() {
     if (this.quantityInput < this.product.quantity) {
-      this.quantityInput = this.quantityInput + 1;
+      this.quantityInput++;
       this.quantityControl.setValue(this.quantityInput);
     }
   }
@@ -69,5 +69,9 @@ export class ProductDetailComponent implements OnInit {
     if (!this.quantityControl.invalid) {
       console.log("Added to chart: " + this.product.code + ' with quantity: ' + this.quantityInput);
     }
+  }
+
+  onDataChange(value: number) {
+    this.quantityInput = value;
   }
 }
