@@ -8,12 +8,17 @@ namespace WebAPI.Data
 {
     public interface IInstrumentRepository
     {
+        // General
         void Add<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveChangesAsync();
 
+        // Instrument
         Task<Instrument[]> GetAllInstrumentsAsync();
         Task<Instrument> GetInstrumentAsync(string code);
         Task<Instrument[]> GetInstrumentsByTypeAsync(string type);
+
+        // Login
+
     }
 }
