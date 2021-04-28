@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
@@ -13,7 +14,8 @@ export class NavComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
   }
@@ -31,12 +33,17 @@ export class NavComponent implements OnInit {
     });
   }
 
-  changeSignInTitleString(): void {
-    if (this.signInTitleString === "Sign in") {
-      this.signInTitleString = "Profile"
+  isUserAuthenticated() {
+    const token: string = localStorage.getItem("jwt");
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      return true;
     }
-    else if (this.signInTitleString === "Profile") {
-      this.signInTitleString = "Sign in"
+    else {
+      return false;
     }
+  }
+
+  logOut() {
+    localStorage.removeItem("jwt");
   }
 }

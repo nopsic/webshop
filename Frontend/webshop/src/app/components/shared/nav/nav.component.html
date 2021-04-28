@@ -16,6 +16,6 @@
       shopping_cart
     </mat-icon>
   </a>
-  <a *ngIf="signInTitleString === 'Sign in'" mat-raised-button color="secondary" (click)="openDialog()">{{signInTitleString}}</a>
-  <a *ngIf="signInTitleString === 'Profile'" mat-raised-button color="secondary" (click)="openDialog()">{{signInTitleString}}</a>
+  <a *ngIf="isUserAuthenticated()" mat-raised-button color="secondary" (click)="logOut()">Profile</a>
+  <a *ngIf="!isUserAuthenticated()" mat-raised-button color="secondary" (click)="openDialog()">Sign in</a>
 </mat-toolbar>

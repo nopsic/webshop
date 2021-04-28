@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +10,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  invalidLogin: boolean;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -23,6 +26,19 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    const credentials = {
+      'email': this.loginForm.value.email,
+      'password': this.loginForm.value.password
+    }
 
+    this.http.post("http://localhost:6600/api/auth/login", credentials)
+      .subscribe(response => {
+        const token = (<any>response).token;
+        localStorage.setItem("jwt", token);
+        this.invalidLogin = false;
+        this.router.navigate(["/"]);
+      }, err => {
+        this.invalidLogin = true;
+      })
   }
 }

@@ -24,6 +24,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTableFilterModule } from 'mat-table-filter';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog'; 
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { JwtModule } from "@auth0/angular-jwt";
 
 import { AppComponent } from './app.component';
 import { StarComponent } from './shared/star.component';
@@ -37,6 +39,11 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { OrderComponent } from './components/order/order.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
+export function tonkenGetter() {
+  return localStorage.getItem("jwt");
+}
 
 const MaterialComponents = [
   MatSidenavModule,
@@ -58,7 +65,8 @@ const MaterialComponents = [
   MatRadioModule,
   MatTableFilterModule,
   MatStepperModule,
-  MatDialogModule
+  MatDialogModule,
+  MatCheckboxModule
 ]
 
 @NgModule({
@@ -74,7 +82,8 @@ const MaterialComponents = [
     RegistrationComponent,
     OrderComponent,
     DialogComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   entryComponents: [DialogComponent],
   imports: [
@@ -84,7 +93,14 @@ const MaterialComponents = [
     MaterialComponents,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tonkenGetter,
+        allowedDomains: ["localhost:6600"],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

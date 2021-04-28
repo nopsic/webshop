@@ -1,6 +1,7 @@
 <mat-toolbar class="header">
   <span>Login</span>
 </mat-toolbar>
+<div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password</div>
 <mat-card class="mat-card">
    <mat-card-content>
       <form class="form" [formGroup]="loginForm">
