@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
                     issuer: Configuration["ApplicationSettings:Server_URL"].ToString(),
                     audience: Configuration["ApplicationSettings:Server_URL"].ToString(),
                     claims: new List<Claim>(),
-                    expires: DateTime.Now.AddMinutes(5),
+                    expires: DateTime.Now.AddMinutes(30),
                     signingCredentials: signingCreditials
                 );
 
