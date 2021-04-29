@@ -18,7 +18,7 @@ namespace WebAPI.Data
         Task<Instrument> GetInstrumentAsync(string code);
         Task<Instrument[]> GetInstrumentsByTypeAsync(string type);
 
-        // Login
-
+        // Register
+        Task<UserData> GetRegisteredUserAsync(string email);
     }
 }

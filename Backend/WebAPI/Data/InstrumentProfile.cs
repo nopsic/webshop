@@ -10,6 +10,9 @@ namespace WebAPI.Data
         {
             this.CreateMap<Instrument, InstrumentModel>()
                 .ReverseMap();
+
+            this.CreateMap<UserData, UserDataModel>()
+                .ReverseMap();
         }
     }
 }

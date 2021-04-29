@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       'password': this.loginForm.value.password
     }
 
-    this.http.post("http://localhost:6600/api/auth/login", credentials)
+    this.http.post("http://localhost:6600/api/customers/login", credentials)
       .subscribe(response => {
         const token = (<any>response).token;
         localStorage.setItem("jwt", token);
