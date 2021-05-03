@@ -32,4 +32,11 @@
       loginForm.get('email').errors?.required || loginForm.get('email').errors?.email"
       >Login</button>
    </mat-card-actions>
+   <div>
+      <mat-card class="progress-bar" *ngIf="showProgress">
+        <mat-card-content>
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </mat-card-content>
+      </mat-card>
+    </div>
 </mat-card>

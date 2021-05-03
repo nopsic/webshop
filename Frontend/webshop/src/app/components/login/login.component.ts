@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   invalidLogin: boolean;
-  hide = true;
+  hide: boolean = true;
+  showProgress: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) { }
 
@@ -32,6 +33,8 @@ export class LoginComponent implements OnInit {
       'password': this.loginForm.value.password
     }
 
+    this.showProgress = true;
+
     this.http.post("http://localhost:6600/api/customers/login", credentials)
       .subscribe(response => {
         const token = (<any>response).token;
@@ -42,5 +45,6 @@ export class LoginComponent implements OnInit {
       }, err => {
         this.invalidLogin = true;
       })
+      this.showProgress = false;
   }
 }
