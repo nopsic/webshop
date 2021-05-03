@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
         const token = (<any>response).token;
         localStorage.setItem("jwt", token);
         this.invalidLogin = false;
+        localStorage.setItem("email", this.loginForm.value.email);
         this.router.navigate(["/"]);
       }, err => {
         this.invalidLogin = true;

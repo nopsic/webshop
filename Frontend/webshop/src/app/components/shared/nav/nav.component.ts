@@ -46,4 +46,8 @@ export class NavComponent implements OnInit {
   logOut() {
     localStorage.removeItem("jwt");
   }
+
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
+  }
 }
