@@ -26,6 +26,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog'; 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JwtModule } from "@auth0/angular-jwt";
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { AppComponent } from './app.component';
 import { StarComponent } from './shared/star.component';
@@ -40,9 +41,11 @@ import { OrderComponent } from './components/order/order.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 export function tonkenGetter() {
-  return localStorage.getItem("jwt");
+  return sessionStorage.getItem("jwt");
 }
 
 const MaterialComponents = [
@@ -66,7 +69,8 @@ const MaterialComponents = [
   MatTableFilterModule,
   MatStepperModule,
   MatDialogModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatBadgeModule
 ]
 
 @NgModule({
@@ -75,7 +79,7 @@ const MaterialComponents = [
     StarComponent,
     FooterComponent,
     NavComponent,
-    //ShoppingCartComponent,
+    ShoppingCartComponent,
     HomeComponent,
     ProductComponent,
     ProductDetailComponent,
@@ -94,6 +98,7 @@ const MaterialComponents = [
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    CdkStepperModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tonkenGetter,

@@ -1,1 +1,108 @@
-<p>shopping-cart works!</p>
+<mat-horizontal-stepper #stepper>
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <p>Go to a different step to see the error state</p>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Fill out your address</ng-template>
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
+               required>
+      </mat-form-field>
+      <div>
+        <p>Go to a different step to see the error state</p>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="cartItemFormGroup" errorMessage="Name is required.">
+    <form [formGroup]="cartItemFormGroup">
+      <ng-template matStepLabel>Finalize your order</ng-template>
+      <mat-form-field>
+        <mat-label>Orders</mat-label>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <p>Go to a different step to see the error state</p>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<!-- <p>shopping-cart works!</p>
+<p>
+
+  <mat-form-field class="full-width">
+    <mat-label>Billing address</mat-label>
+    <textarea matInput placeholder="Ex. Széchenyi Street 48/a"
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="3"
+      formControlName="billingAddress"
+      maxlength="140"
+      required
+      [readonly]="sameAddressIsChecked">
+    </textarea>
+  </mat-form-field>
+</p>
+
+<p>
+  <mat-checkbox class="margin" color="warn"
+    (click)="sameAddress()">Same as the delivery address</mat-checkbox>
+</p>
+
+<h5>Address</h5>
+
+<table class="full-width" cellspacing="0"><tr>
+  <td><mat-form-field class="full-width">
+    <mat-label>City</mat-label>
+    <input matInput placeholder="Ex. Pécs" formControlName="city">
+  </mat-form-field></td>
+  <td><mat-form-field class="full-width">
+    <mat-label>State</mat-label>
+    <input matInput placeholder="Ex. Baranya" formControlName="state">
+  </mat-form-field></td>
+  <td><mat-form-field class="full-width">
+    <mat-label>Postal Code</mat-label>
+    <input matInput #postalCode maxlength="4" placeholder="Ex. 7630"
+      formControlName="postalCode">
+    <mat-hint align="end">{{postalCode.value.length}} / 4</mat-hint>
+  </mat-form-field></td>
+</tr></table>
+
+<p>
+  <mat-form-field class="full-width">
+    <mat-label>Delivery address</mat-label>
+    <textarea matInput placeholder="Ex. Széchenyi Street 48/a"
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="3"
+      formControlName="address"
+      maxlength="140">
+    </textarea>
+  </mat-form-field>
+</p> -->
