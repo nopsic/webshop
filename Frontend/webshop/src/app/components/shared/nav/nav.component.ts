@@ -11,6 +11,7 @@ import { DialogComponent } from '../../dialog/dialog.component';
 })
 export class NavComponent implements OnInit {
   signInTitleString: string = "Sign in";
+  instrumentQuantity: number = null;
 
   constructor(public dialog: MatDialog,
               private route: ActivatedRoute,
@@ -34,7 +35,7 @@ export class NavComponent implements OnInit {
   }
 
   isUserAuthenticated() {
-    const token: string = localStorage.getItem("jwt");
+    const token: string = sessionStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
       return true;
     }
@@ -44,7 +45,7 @@ export class NavComponent implements OnInit {
   }
 
   logOut() {
-    localStorage.removeItem("jwt");
+    sessionStorage.removeItem("jwt");
   }
 
   navigateToProfile() {

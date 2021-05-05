@@ -1,13 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-export interface ICustomer {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
+import { CustomerService } from 'src/app/services/customer.service';
+import { ICustomer } from '../shared/customer/customer';
 
 @Component({
   selector: 'app-profile',
@@ -17,31 +12,17 @@ export interface ICustomer {
 
 export class ProfileComponent implements OnInit {
   customer: ICustomer;
-  customerName: string = "";
+  customerName: string = '';
   showProgress: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private customerService: CustomerService) { }
 
   ngOnInit() {
-    // this.http.get("http://localhost:6600/api/customers").subscribe(response => {
-    //   this.customers = response;
-    // }, err => {
-    //   console.log(err)
-    // });
-
-    this.showProgress = true;
-    this.http.get<ICustomer>("http://localhost:6600/api/customers/" + localStorage.getItem("email")).subscribe(response => {
-      this.customer = response;
-      this.customerName = this.customer.firstName + ' ' + this.customer.lastName;
-    }, err => {
-      console.log(err)
-    });
-    this.showProgress = false;
+    this.customerName = this.customerService.getName();
   }
 
   logOut() {
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("email");
+    sessionStorage.removeItem("jwt");
     this.router.navigate(['/']);
   }
 }

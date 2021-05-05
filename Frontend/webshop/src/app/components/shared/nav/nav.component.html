@@ -11,8 +11,8 @@
   </a>
   <a mat-button routerLink="products">Products</a>
   <a mat-button routerLink="aboutus">About us</a>
-  <a mat-button routerLink="aboutus">
-    <mat-icon aria-hidden="false" aria-label="Example home icon">
+  <a mat-button routerLink="shoppingcart">
+    <mat-icon [matBadge]="instrumentQuantity" matBadgeColor="warn" aria-hidden="false">
       shopping_cart
     </mat-icon>
   </a>

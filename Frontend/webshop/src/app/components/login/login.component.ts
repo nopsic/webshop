@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   hide: boolean = true;
   showProgress: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private customerService: CustomerService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -27,20 +28,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login() {
+  async login() {
     const credentials = {
       'email': this.loginForm.value.email,
       'password': this.loginForm.value.password
     }
+
+    this.customerService.setEmail(credentials.email);
 
     this.showProgress = true;
 
     this.http.post("http://localhost:6600/api/customers/login", credentials)
       .subscribe(response => {
         const token = (<any>response).token;
-        localStorage.setItem("jwt", token);
+        sessionStorage.setItem("jwt", token);
         this.invalidLogin = false;
-        localStorage.setItem("email", this.loginForm.value.email);
+        this.customerService.getCustomerData();
         this.router.navigate(["/"]);
       }, err => {
         this.invalidLogin = true;
