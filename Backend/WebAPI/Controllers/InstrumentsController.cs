@@ -146,9 +146,9 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("quantity")]
-        public async Task<ActionResult> CheckSelectedInstrumentsQuantity([FromBody] Instrument[] instruments)
+        public async Task<string> CheckSelectedInstrumentsQuantity([FromBody] Instrument[] instruments)
         {
             var allInstruments = await _repository.GetAllInstrumentsAsync();
 
@@ -169,7 +169,7 @@ namespace WebAPI.Controllers
 
             if (selectedInstruments.Count == 0)
             {
-                return NotFound("Failed to find the selected instruments");
+                return "Failed to find the selected instruments";
             }
 
             for (int i = 0; i < instruments.Length; i++)
@@ -192,10 +192,10 @@ namespace WebAPI.Controllers
 
             if (errorMessage == "")
             {
-                return Ok();
+                return "";
             }
 
-            return NotFound(errorMessage);
+            return errorMessage;
         }
     }
 }

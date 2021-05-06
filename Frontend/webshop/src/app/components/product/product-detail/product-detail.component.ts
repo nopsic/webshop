@@ -69,8 +69,6 @@ export class ProductDetailComponent implements OnInit {
 
   addToChart() {
     if (!this.quantityControl.invalid) {
-      console.log("Added to chart: " + this.product.code + ' with quantity: ' + this.quantityInput);
-
       let myProduct = {
         instrumentId: 0,
         name: '',
@@ -88,13 +86,9 @@ export class ProductDetailComponent implements OnInit {
       myProduct.code = this.product.code;
       myProduct.price = this.product.price;
 
-      myProduct.quantity = this.quantityInput;
-
-      console.log(myProduct);
+      myProduct.quantity = Number(this.quantityInput);
 
       this.shoppingCartService.addItem(myProduct);
-
-      console.log(this.shoppingCartService.getCartItems());
     }
   }
 

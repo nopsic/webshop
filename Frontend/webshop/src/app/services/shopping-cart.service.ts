@@ -15,7 +15,9 @@ export class ShoppingCartService {
 
     this.cartItems.forEach((element, index) => {
       if (element.code === product.code) {
-        this.cartItems[index].quantity += product.quantity;
+        console.log(this.cartItems[index].quantity);
+        console.log(product.quantity);
+        this.cartItems[index].quantity += Number(product.quantity);
         found = true;
         return;
       }
