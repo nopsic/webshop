@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit {
       'password': this.loginForm.value.password
     }
 
-    this.customerService.setEmail(credentials.email);
-
     this.showProgress = true;
 
     this.http.post("http://localhost:6600/api/customers/login", credentials)
@@ -43,6 +41,7 @@ export class LoginComponent implements OnInit {
         const token = (<any>response).token;
         sessionStorage.setItem("jwt", token);
         this.invalidLogin = false;
+        sessionStorage.setItem("email", credentials.email);
         this.customerService.getCustomerData();
         this.router.navigate(["/"]);
       }, err => {

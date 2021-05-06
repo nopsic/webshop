@@ -23,6 +23,9 @@ export class ProfileComponent implements OnInit {
 
   logOut() {
     sessionStorage.removeItem("jwt");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("firstName");
+    sessionStorage.removeItem("lastName");
     this.router.navigate(['/']);
   }
 }

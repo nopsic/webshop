@@ -7,12 +7,6 @@ import { ICustomer } from '../components/shared/customer/customer';
   providedIn: 'root'
 })
 export class CustomerService {
-  customer: ICustomer = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: ''
-  };
 
   constructor(private jwtHelper: JwtHelperService, private http: HttpClient) { }
 
@@ -20,8 +14,9 @@ export class CustomerService {
     const token = sessionStorage.getItem("jwt");
 
     if (token && !this.jwtHelper.isTokenExpired(token)) {
-      this.http.get<ICustomer>("http://localhost:6600/api/customers/" + this.customer.email).subscribe(response => {
-        this.customer = response;
+      this.http.get<ICustomer>("http://localhost:6600/api/customers/" + sessionStorage.getItem("email")).subscribe(response => {
+        sessionStorage.setItem("firstName", response.firstName);
+        sessionStorage.setItem("lastName", response.lastName);
       }, err => {
         console.log(err)
       });
@@ -29,10 +24,6 @@ export class CustomerService {
   }
 
   getName() {
-    return this.customer.firstName + ' ' + this.customer.lastName;
-  }
-
-  setEmail(email: string) {
-    this.customer.email = email;
+    return sessionStorage.getItem("firstName") + ' ' + sessionStorage.getItem("lastName");
   }
 }
