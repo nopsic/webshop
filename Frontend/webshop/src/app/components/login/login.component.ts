@@ -29,12 +29,11 @@ export class LoginComponent implements OnInit {
   }
 
   async login() {
+    this.showProgress = true;
     const credentials = {
       'email': this.loginForm.value.email,
       'password': this.loginForm.value.password
     }
-
-    this.showProgress = true;
 
     this.http.post("http://localhost:6600/api/customers/login", credentials)
       .subscribe(response => {
@@ -44,9 +43,9 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("email", credentials.email);
         this.customerService.getCustomerData();
         this.router.navigate(["/"]);
+        this.showProgress = false;
       }, err => {
         this.invalidLogin = true;
       })
-      this.showProgress = false;
   }
 }

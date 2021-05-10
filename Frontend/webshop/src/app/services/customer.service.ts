@@ -23,7 +23,15 @@ export class CustomerService {
     }
   }
 
-  getName() {
-    return sessionStorage.getItem("firstName") + ' ' + sessionStorage.getItem("lastName");
+  getFirstName() {
+    return sessionStorage.getItem("firstName");
+  }
+
+  getLastName() {
+    return sessionStorage.getItem("lastName");
+  }
+
+  getEmail() {
+    return sessionStorage.getItem("email");
   }
 }

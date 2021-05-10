@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -15,10 +14,10 @@ export class ProfileComponent implements OnInit {
   customerName: string = '';
   showProgress: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router, private customerService: CustomerService) { }
+  constructor(private router: Router, private customerService: CustomerService) { }
 
   ngOnInit() {
-    this.customerName = this.customerService.getName();
+    this.customerName = this.customerService.getFirstName() + ' ' + this.customerService.getLastName();
   }
 
   logOut() {
