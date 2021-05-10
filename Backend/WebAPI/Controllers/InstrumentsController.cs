@@ -178,7 +178,7 @@ namespace WebAPI.Controllers
                 {
                     if (instruments[i].Code == selectedInstruments[j].Code)
                     {
-                        if (instruments[i].Quantity > selectedInstruments[j].Quantity)
+                        if (instruments[i].Quantity > selectedInstruments[j].Quantity || instruments[i].Quantity < 0)
                         {
                             errorMessage += $"There is only {selectedInstruments[j].Quantity} pieces of {instruments[i].Code}\n";
                         }
