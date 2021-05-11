@@ -15,6 +15,7 @@ namespace WebAPI.Data
 
         public DbSet<Instrument> Instruments { get; set; }
         public DbSet<UserData> Users { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

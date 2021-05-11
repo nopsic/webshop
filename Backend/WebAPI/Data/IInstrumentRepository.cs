@@ -20,5 +20,8 @@ namespace WebAPI.Data
 
         // Register
         Task<UserData> GetRegisteredUserAsync(string email);
+
+        // Order
+        Task<Order[]> GetOrderByEmailAsync(string email);
     }
 }

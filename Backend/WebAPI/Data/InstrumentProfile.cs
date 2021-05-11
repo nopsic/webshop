@@ -13,6 +13,9 @@ namespace WebAPI.Data
 
             this.CreateMap<UserData, UserDataModel>()
                 .ReverseMap();
+
+            this.CreateMap<Order, OrderModel>()
+                .ReverseMap();
         }
     }
 }

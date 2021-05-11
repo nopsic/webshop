@@ -77,6 +77,17 @@ namespace WebAPI.Data
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<Order[]> GetOrderByEmailAsync(string email)
+        {
+            _logger.LogInformation($"Getting an Orders by email: {email}");
+            IQueryable<Order> query = _context.Orders;
+
+            // Query It
+            query = query.Where(c => c.Email == email);
+
+            return await query.ToArrayAsync();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             _logger.LogInformation($"Attempitng to save the changes in the context");
