@@ -1,5 +1,13 @@
 <div>
   <h1>Welcome in our page {{customerName}}</h1>
   
-  <a mat-raised-button color="secondary" (click)="logOut()">Logout</a>
+  <a class="button" mat-raised-button color="secondary" (click)="logOut()">Logout</a>
+  <a class="button" mat-raised-button color="secondary" (click)="dialogResponse()">Delete profile</a>
+  <div>
+    <mat-card class="progress-bar" *ngIf="showProgress">
+      <mat-card-content>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-
 
 function notTheSameControlValues(controlName1: string, controlName2: string){
   return (formGroup: FormGroup) => {
@@ -29,7 +27,7 @@ function notTheSameControlValues(controlName1: string, controlName2: string){
 export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   emailInput: string = '';
-  sub!: Subscription;
+  showProgress: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
   }
@@ -40,7 +38,7 @@ export class RegistrationComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       confirmEmail: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]],
     }, {
       validator: [notTheSameControlValues('password', 'confirmPassword'), notTheSameControlValues('email', 'confirmEmail')]
@@ -59,6 +57,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showProgress = true;
     const userData = {
       'firstname': this.registerForm.value.firstName,
       'lastname': this.registerForm.value.lastName,
@@ -68,7 +67,9 @@ export class RegistrationComponent implements OnInit {
 
     this.http.post("http://localhost:6600/api/customers/register", userData)
       .subscribe( response => {
+        this.showProgress = false;
           this.router.navigate(["/"]);
+          window.alert("Your registration was successful!");
       }, err => {
         window.alert("This email has been already registered");
       })

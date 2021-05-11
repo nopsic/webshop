@@ -14,7 +14,6 @@ export class NavComponent implements OnInit {
   instrumentQuantity: number = null;
 
   constructor(public dialog: MatDialog,
-              private route: ActivatedRoute,
               private router: Router,
               private jwtHelper: JwtHelperService) { }
 

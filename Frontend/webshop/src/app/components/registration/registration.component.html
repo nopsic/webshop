@@ -58,6 +58,9 @@
         <mat-error *ngIf="registerForm.get('password').errors?.required">
           This field is mandatory to fill.
         </mat-error>
+        <mat-error *ngIf="registerForm.get('password').errors?.minlength">
+          It must be at least 8 characters long.
+        </mat-error>
       </mat-form-field></td>
       </tr>
       <tr><mat-form-field class="full-width">
@@ -69,6 +72,13 @@
       </mat-form-field></tr>
     </table>
   
+    <div>
+      <mat-card class="progress-bar" *ngIf="showProgress">
+        <mat-card-content>
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </mat-card-content>
+      </mat-card>
+    </div>
     <p>
       <button mat-raised-button [disabled]="registerForm.invalid" (click)="onSubmit()">Submit</button>
       <button mat-raised-button class="clear" (click)="clear()">Clear</button>
