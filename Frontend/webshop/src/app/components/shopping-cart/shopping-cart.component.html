@@ -152,7 +152,17 @@
           <!-- Price Column -->
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef> Price </th>
-            <td mat-cell *matCellDef="let element"> {{element.price | currency:'HUF':'symbol':'1.2-2'}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.price * element.quantity | currency:'HUF':'symbol':'1.2-2'}} </td>
+          </ng-container>
+
+          <!-- Delete Column -->
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let element"> 
+              <button type="button" class="icon-delete" mat-mini-fab color="warn" (click)="deleteItem(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
           </ng-container>
         
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -167,7 +177,9 @@
       </mat-card>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button *ngIf="products.length !== 0" mat-button (click)="order()">Order</button>
+        <button *ngIf="products.length !== 0" mat-button 
+          [disabled]="firstFormGroup.invalid || secondFormGroup.invalid || thirdFormGroup.invalid"
+         (click)="order()">Order</button>
         <button mat-button (click)="reset();stepper.reset()">Reset All</button>
       </div>
     </form>

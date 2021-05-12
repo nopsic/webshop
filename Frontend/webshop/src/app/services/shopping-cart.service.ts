@@ -34,14 +34,28 @@ export class ShoppingCartService {
     }
   }
 
+  removeAlItem() : void {
+    this.cartItems.forEach((element, index) => {
+      this.cartItems = [];
+      sessionStorage.setItem("instrumentQuantity", "0");
+    });
+  }
+
+  removeFunction(array: IProduct[], value: IProduct) {
+    return array.filter(function(element) {
+      return element != value;
+    });
+  }
+
   removeItem(product: IProduct): void {
     this.cartItems.forEach((element, index) => {
       if (element === product) {
         let numberOfInstruments = Number(sessionStorage.getItem("instrumentQuantity"));
-        numberOfInstruments -= Number(product.quantity);
+        numberOfInstruments -= Number(element.quantity);
         sessionStorage.setItem("instrumentQuantity", numberOfInstruments.toString());
-        delete this.cartItems[index];
-        return;
+
+        this.cartItems = this.removeFunction(this.cartItems, element);
+        //this.cartItems = this.cartItems.splice(index, 1);
       }
     });
   }

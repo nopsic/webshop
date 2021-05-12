@@ -45,7 +45,7 @@ export class ShoppingCartComponent implements OnInit {
 
   dataSource: MatTableDataSource<IProduct>;
   products: IProduct[] = [];
-  displayedColumns: string[] = ['name', 'code', 'minus', 'quantity', 'plus', 'price'];
+  displayedColumns: string[] = ['name', 'code', 'minus', 'quantity', 'plus', 'price', 'delete'];
 
   showMatProgress: boolean = false;
 
@@ -87,7 +87,6 @@ export class ShoppingCartComponent implements OnInit {
 
     this.showMatProgress = true;
     this.products = this.cartService.getCartItems();
-    console.log(this.products);
     this.dataSource = new MatTableDataSource(this.products);
     this.showMatProgress = false;
   }
@@ -135,7 +134,24 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   reset() {
+    this.cartService.removeAlItem();
+
     this.products = [];
+
+    this.dataSource = new MatTableDataSource(this.products);
+  }
+
+  removeFunction(array: IProduct[], value: IProduct) {
+    return array.filter(function(element) {
+      return element != value;
+    });
+  }
+
+  deleteItem(item : IProduct) {
+    this.cartService.removeItem(item);
+
+    this.products = this.removeFunction(this.products, item);
+
     this.dataSource = new MatTableDataSource(this.products);
   }
 }
