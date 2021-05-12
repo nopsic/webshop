@@ -11,13 +11,18 @@ import { DialogComponent } from '../../dialog/dialog.component';
 })
 export class NavComponent implements OnInit {
   signInTitleString: string = "Sign in";
-  instrumentQuantity: number = null;
+  instrumentQuantity: number = 0;
 
   constructor(public dialog: MatDialog,
               private router: Router,
               private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
+    sessionStorage.setItem("instrumentQuantity", this.instrumentQuantity.toString());
+
+    setInterval(() => {
+      this.instrumentQuantity = (Number)(sessionStorage.getItem("instrumentQuantity"));
+    });
   }
 
   openDialog(): void {

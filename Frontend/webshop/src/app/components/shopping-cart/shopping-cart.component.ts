@@ -109,6 +109,10 @@ export class ShoppingCartComponent implements OnInit {
 
     product.quantity -= 1;
 
+    let numberOfInstruments = Number(sessionStorage.getItem("instrumentQuantity"));
+    numberOfInstruments -= 1;
+    sessionStorage.setItem("instrumentQuantity", numberOfInstruments.toString());
+
     this.products[index] = product;
 
     this.dataSource = new MatTableDataSource(this.products);
@@ -120,6 +124,10 @@ export class ShoppingCartComponent implements OnInit {
     let product = this.products[index];
 
     product.quantity += 1;
+
+    let numberOfInstruments = Number(sessionStorage.getItem("instrumentQuantity"));
+    numberOfInstruments += 1;
+    sessionStorage.setItem("instrumentQuantity", numberOfInstruments.toString());
 
     this.products[index] = product;
 
