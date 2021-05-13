@@ -182,17 +182,8 @@ namespace WebAPI.Controllers
                         {
                             errorMessage += $"There is only {selectedInstruments[j].Quantity} pieces of {instruments[i].Code}\n";
                         }
-                        else
-                        {
-
-                        }
                     }
                 }
-            }
-
-            if (errorMessage == "")
-            {
-                return "";
             }
 
             return errorMessage;
