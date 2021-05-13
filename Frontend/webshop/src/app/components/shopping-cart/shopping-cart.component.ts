@@ -47,7 +47,7 @@ export class ShoppingCartComponent implements OnInit {
   products: IProduct[] = [];
   displayedColumns: string[] = ['name', 'code', 'minus', 'quantity', 'plus', 'price', 'delete'];
 
-  showMatProgress: boolean = false;
+  showProgress: boolean = false;
 
   constructor(private fb: FormBuilder, private customerService: CustomerService,
               private cartService: ShoppingCartService, private http: HttpClient,
@@ -85,19 +85,46 @@ export class ShoppingCartComponent implements OnInit {
       this.secondFormGroup.get("confirmEmail").patchValue(this.customerService.getEmail());
     }
 
-    this.showMatProgress = true;
+    this.showProgress = true;
     this.products = this.cartService.getCartItems();
     this.dataSource = new MatTableDataSource(this.products);
-    this.showMatProgress = false;
+    this.showProgress = false;
   }
 
-  order(): void {
+  orderCheck(): void {
+    this.showProgress = true;
     this.http.post("http://localhost:6600/api/instruments/quantity", this.products)
       .subscribe( response => {
-        window.alert("Your order was registered! Thank you!");
-        this.router.navigate(["/"]);
+        this.placeOrder();
       }, err => {
         window.alert(err.error.text);
+        this.showProgress = false;
+      })
+  }
+
+  placeOrder(): void {
+    this.products.forEach(element => {
+      element.price = element.price * element.quantity;
+    });
+
+    let city = this.thirdFormGroup.get("billingCity").value;
+    let state = this.thirdFormGroup.get("billingState").value;
+    let postalCode = this.thirdFormGroup.get("billingPostalCode").value;
+    let address = this.thirdFormGroup.get("billingAddress").value;
+
+    let json1 = JSON.parse(JSON.stringify(city + ";" + state + ";" + postalCode + ";" + address));
+    let json2 = JSON.parse((JSON.stringify(this.products)));
+
+    let jsonConcat = json2.concat(json1);
+
+    this.http.post("http://localhost:6600/api/orders/" + sessionStorage.getItem("email") + "/" + this.products.length, jsonConcat)
+      .subscribe( response => {
+        window.alert("Your order was registered! Thank you!");
+        this.showProgress = false;
+        this.reset();
+        this.router.navigate(["/"]);
+      }, err => {
+        console.log(err);
       })
   }
 

@@ -170,17 +170,19 @@
         </table>
       </div>
       <div *ngIf="products.length === 0"><h2>Your cart is empty.</h2></div>
-      <mat-card class="progress-bar" *ngIf="showMatProgress">
-        <mat-card-content>
-          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-        </mat-card-content>
-      </mat-card>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button *ngIf="products.length !== 0" mat-button 
           [disabled]="firstFormGroup.invalid || secondFormGroup.invalid || thirdFormGroup.invalid"
-         (click)="order()">Order</button>
+         (click)="orderCheck()">Order</button>
         <button mat-button (click)="reset();stepper.reset()">Reset All</button>
+      </div>
+      <div *ngIf="showProgress">
+        <mat-card class="progress-bar">
+          <mat-card-content>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </mat-card-content>
+        </mat-card>
       </div>
     </form>
   </mat-step>
