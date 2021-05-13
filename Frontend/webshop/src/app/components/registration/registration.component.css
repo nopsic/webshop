@@ -6,7 +6,7 @@
 }
 
 .div {
-  background-color: goldenrod;
+  background-color: rgb(247, 198, 75);
 }
 
 .full-width {
@@ -27,4 +27,9 @@ button {
 
 .error {
   margin-bottom: 20px;
+}
+
+.register {
+  background-color: whitesmoke;
+  padding: 25px;
 }

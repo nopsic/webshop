@@ -15,3 +15,8 @@ table {
   background-color:whitesmoke;
   font-weight: 500;
 }
+
+.stepper {
+  background-color:wheat;
+  padding: 25px;
+}

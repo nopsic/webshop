@@ -1,87 +1,94 @@
 <div class="div">
-  <form class="form" [formGroup]="registerForm">
-    <h3>Registration form</h3>
+  <mat-grid-list cols="5" rowHeight="800px">
+    <mat-grid-tile colspan="1"></mat-grid-tile>
+    <mat-grid-tile colspan="3">
+        <form class="form" [formGroup]="registerForm" class="register">
+
+        <h3>Registration form</h3>
+        
+        <h5>Name</h5>
+        <table class="full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="full-width">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName" required minlength="2">
+            <mat-error *ngIf="registerForm.get('firstName').errors?.required">
+              This field is mandatory to fill.
+            </mat-error>
+            <mat-error *ngIf="registerForm.get('firstName').errors?.minlength">
+              The minimum length is 2 characters.
+            </mat-error>
+          </mat-form-field></td>
+          <td><mat-form-field class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" required minlength="2">
+            <mat-error *ngIf="registerForm.get('lastName').errors?.required">
+              This field is mandatory to fill.
+            </mat-error>
+            <mat-error *ngIf="registerForm.get('lastName').errors?.minlength">
+              The minimum length is 2 characters.
+            </mat-error>
+          </mat-form-field></td>
+        </tr></table>
     
-    <h5>Name</h5>
-    <table class="full-width" cellspacing="0"><tr>
-      <td><mat-form-field class="full-width">
-        <mat-label>First name</mat-label>
-        <input matInput formControlName="firstName" required minlength="2">
-        <mat-error *ngIf="registerForm.get('firstName').errors?.required">
-          This field is mandatory to fill.
-        </mat-error>
-        <mat-error *ngIf="registerForm.get('firstName').errors?.minlength">
-          The minimum length is 2 characters.
-        </mat-error>
-      </mat-form-field></td>
-      <td><mat-form-field class="full-width">
-        <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName" required minlength="2">
-        <mat-error *ngIf="registerForm.get('lastName').errors?.required">
-          This field is mandatory to fill.
-        </mat-error>
-        <mat-error *ngIf="registerForm.get('lastName').errors?.minlength">
-          The minimum length is 2 characters.
-        </mat-error>
-      </mat-form-field></td>
-    </tr></table>
-
-    <h5>Email</h5>
-
-    <table class="full-width" cellspacing="0"><tr>
-      <td><mat-form-field class="full-width">
-        <mat-label>Email</mat-label>
-        <input name="email" matInput formControlName="email" required>
-        <mat-error *ngIf="registerForm.get('email').errors?.required">
-          This field is mandatory to fill.
-        </mat-error>
-        <mat-error *ngIf="registerForm.get('email').errors?.email">
-          It must be a valid email.
-        </mat-error>
-      </mat-form-field></td>
-      </tr>
-      <tr><mat-form-field class="full-width">
-        <mat-label>Confirm email</mat-label>
-        <input name="email" matInput formControlName="confirmEmail" required>
-        <mat-error class="error" *ngIf="registerForm.get('confirmEmail').errors?.different">
-          The emails are not the same.
-        </mat-error>
-      </mat-form-field></tr>
-    </table>
-
-    <h5>Password</h5>
-
-    <table class="full-width" cellspacing="0"><tr>
-      <td><mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="password" required>
-        <mat-error *ngIf="registerForm.get('password').errors?.required">
-          This field is mandatory to fill.
-        </mat-error>
-        <mat-error *ngIf="registerForm.get('password').errors?.minlength">
-          It must be at least 8 characters long.
-        </mat-error>
-      </mat-form-field></td>
-      </tr>
-      <tr><mat-form-field class="full-width">
-        <mat-label>Confirm password</mat-label>
-        <input type="password" matInput formControlName="confirmPassword" required>
-        <mat-error class="error" *ngIf="registerForm.get('confirmPassword').errors?.different">
-          The passwords are not the same.
-        </mat-error>
-      </mat-form-field></tr>
-    </table>
-  
-    <div>
-      <mat-card class="progress-bar" *ngIf="showProgress">
-        <mat-card-content>
-          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <p>
-      <button mat-raised-button [disabled]="registerForm.invalid" (click)="onSubmit()">Submit</button>
-      <button mat-raised-button class="clear" (click)="clear()">Clear</button>
-    </p>
-  </form>
+        <h5>Email</h5>
+    
+        <table class="full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input name="email" matInput formControlName="email" required>
+            <mat-error *ngIf="registerForm.get('email').errors?.required">
+              This field is mandatory to fill.
+            </mat-error>
+            <mat-error *ngIf="registerForm.get('email').errors?.email">
+              It must be a valid email.
+            </mat-error>
+          </mat-form-field></td>
+          </tr>
+          <tr><mat-form-field class="full-width">
+            <mat-label>Confirm email</mat-label>
+            <input name="email" matInput formControlName="confirmEmail" required>
+            <mat-error class="error" *ngIf="registerForm.get('confirmEmail').errors?.different">
+              The emails are not the same.
+            </mat-error>
+          </mat-form-field></tr>
+        </table>
+    
+        <h5>Password</h5>
+    
+        <table class="full-width" cellspacing="0"><tr>
+          <td><mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" required>
+            <mat-error *ngIf="registerForm.get('password').errors?.required">
+              This field is mandatory to fill.
+            </mat-error>
+            <mat-error *ngIf="registerForm.get('password').errors?.minlength">
+              It must be at least 8 characters long.
+            </mat-error>
+          </mat-form-field></td>
+          </tr>
+          <tr><mat-form-field class="full-width">
+            <mat-label>Confirm password</mat-label>
+            <input type="password" matInput formControlName="confirmPassword" required>
+            <mat-error class="error" *ngIf="registerForm.get('confirmPassword').errors?.different">
+              The passwords are not the same.
+            </mat-error>
+          </mat-form-field></tr>
+        </table>
+      
+        <div>
+          <mat-card class="progress-bar" *ngIf="showProgress">
+            <mat-card-content>
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <p>
+          <button mat-raised-button [disabled]="registerForm.invalid" (click)="onSubmit()">Submit</button>
+          <button mat-raised-button class="clear" (click)="clear()">Clear</button>
+        </p>
+      </form>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1"></mat-grid-tile>
+    </mat-grid-list>
 </div>

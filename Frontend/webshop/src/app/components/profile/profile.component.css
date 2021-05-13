@@ -9,3 +9,19 @@
   display: block;
   font-size: 16px;
 }
+
+.grid {
+  background-color:rgb(247, 198, 75);
+}
+
+.leftGrid {
+  background-color:wheat;
+  padding: 25px;
+  padding-bottom: 120px;
+}
+
+img {
+  padding-top: 100px;
+  padding-left: 170px;
+  width: 350px;
+}
