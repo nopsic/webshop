@@ -27,11 +27,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JwtModule } from "@auth0/angular-jwt";
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 import { AppComponent } from './app.component';
 import { StarComponent } from './shared/star.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
-//import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { NavComponent } from './components/shared/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
@@ -44,6 +46,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { DeleteDialogComponent } from './components/dialog/delete-dialog/delete-dialog.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 export function tonkenGetter() {
   return sessionStorage.getItem("jwt");
@@ -71,7 +74,10 @@ const MaterialComponents = [
   MatStepperModule,
   MatDialogModule,
   MatCheckboxModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatGridListModule,
+  MatDividerModule,
+  MatListModule
 ]
 
 @NgModule({
@@ -89,7 +95,8 @@ const MaterialComponents = [
     DialogComponent,
     LoginComponent,
     ProfileComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    AboutUsComponent
   ],
   entryComponents: [DialogComponent],
   imports: [
