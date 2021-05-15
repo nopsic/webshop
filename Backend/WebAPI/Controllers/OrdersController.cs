@@ -51,6 +51,19 @@ namespace WebAPI.Controllers
                     instruments.Add(JsonConvert.DeserializeObject<Instrument>(data[i].ToString()));
                 }
 
+                Order lastOrder = await _repository.GetLastOrderAsync();
+
+                int orderNumber;
+
+                if (lastOrder == null)
+                {
+                    orderNumber = 1;
+                }
+                else
+                {
+                    orderNumber = lastOrder.OrderNumber + 1;
+                }
+
                 string addressData = data[numberOfInstruments].ToString();
 
                var splittedData = addressData.Split(";");
@@ -70,6 +83,7 @@ namespace WebAPI.Controllers
                     order.BillingPostalCode = splittedData[2];
                     order.BillingAddress = splittedData[3];
                     order.Date = DateTime.Now;
+                    order.OrderNumber = orderNumber;
 
                     orders.Add(order);
                 }

@@ -23,5 +23,6 @@ namespace WebAPI.Data
 
         // Order
         Task<Order[]> GetOrderByEmailAsync(string email);
+        Task<Order> GetLastOrderAsync();
     }
 }

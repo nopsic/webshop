@@ -17,5 +17,6 @@ namespace WebAPI.Data.Entities
         public string BillingPostalCode { get; set; }
         public string BillingAddress { get; set; }
         public DateTime Date { get; set; }
+        public int OrderNumber { get; set; }
     }
 }

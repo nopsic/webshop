@@ -95,5 +95,16 @@ namespace WebAPI.Data
             // Only return success if at least one row was changed
             return (await _context.SaveChangesAsync()) > 0;
         }
+
+        public async Task<Order> GetLastOrderAsync()
+        {
+            _logger.LogInformation($"Getting last Order");
+            IQueryable<Order> query = _context.Orders;
+
+            // Order It
+            query = query.OrderByDescending(c => c.OrderNumber);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }
