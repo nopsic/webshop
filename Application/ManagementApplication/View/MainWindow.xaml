@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ManagementApplication"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <Grid>
         <!--<GroupBox HorizontalAlignment="Left">
             <StackPanel>
@@ -21,20 +22,11 @@
         <TextBox HorizontalAlignment="Center" Text="{Binding Path=Text, Mode=TwoWay}" ></TextBox>
         <ListBox HorizontalAlignment="Right" ItemsSource="{Binding Path=Past}"></ListBox>-->
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Padding="5" Margin="10">
-                <TextBlock>Add new instrument</TextBlock>
+            <Button Command="{Binding InstrumentClickCommand}" Padding="5" Margin="10">
+                <TextBlock>List of instruments</TextBlock>
             </Button>
             <Button Padding="5" Margin="10">
-                <TextBlock>Delete instrument</TextBlock>
-            </Button>
-            <Button Padding="5" Margin="10">
-                <TextBlock>Change an instrument's price</TextBlock>
-            </Button>
-            <Button Padding="5" Margin="10">
-                <TextBlock>Change an instrument's quantity</TextBlock>
-            </Button>
-            <Button Padding="5" Margin="10">
-                <TextBlock>List orders</TextBlock>
+                <TextBlock>List of orders</TextBlock>
             </Button>
             <Button Padding="5" Margin="10">
                 <TextBlock>Change an order's status</TextBlock>

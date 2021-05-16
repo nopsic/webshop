@@ -1,4 +1,4 @@
-﻿using ManagementApplication.Model;
+﻿using ManagementApplication.View;
 
 namespace ManagementApplication.ViewModel
 {
@@ -6,15 +6,34 @@ namespace ManagementApplication.ViewModel
     {
         #region Fields
 
-        private ApplicationModel _appModel;
+        private InstrumentWindow _newInstrumentWindow;
+        private InstrumentWindowViewModel _newInstrumentWindowViewModel;
+
+        #endregion
+
+        #region Properties
+
+        public DelegateCommand InstrumentClickCommand { get; private set; }
 
         #endregion
 
         #region Constructor
 
-        public MainWindowViewModel(ApplicationModel appModel)
+        public MainWindowViewModel()
         {
-            _appModel = appModel;
+            InstrumentClickCommand = new DelegateCommand(param => OpenInstrumentWindow());
+        }
+
+        #endregion
+
+
+        #region Private methods
+
+        private void OpenInstrumentWindow()
+        {
+            _newInstrumentWindowViewModel = new InstrumentWindowViewModel();
+            _newInstrumentWindow = new InstrumentWindow(_newInstrumentWindowViewModel);
+            _newInstrumentWindow.Show();
         }
 
         #endregion

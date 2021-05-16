@@ -1,11 +1,4 @@
-﻿using ManagementApplication.Model;
-using ManagementApplication.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ManagementApplication.ViewModel;
 using System.Windows;
 
 namespace ManagementApplication
@@ -18,7 +11,6 @@ namespace ManagementApplication
         #region Fields
 
         private MainWindow _view;
-        private ApplicationModel _appModel;
         private MainWindowViewModel _appViewModel;
 
         #endregion
@@ -32,16 +24,17 @@ namespace ManagementApplication
 
         #endregion
 
-        #region Application event handlers
+        #region Event handlers
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            _appModel = new ApplicationModel();
-            _appViewModel = new MainWindowViewModel(_appModel);
+            _appViewModel = new MainWindowViewModel();
             _view = new MainWindow();
             _view.DataContext = _appViewModel;
             _view.Show();
         }
+
+
 
         #endregion
     }
