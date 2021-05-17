@@ -5,34 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="#f7c64b">
 
     <Grid>
-        <!--<GroupBox HorizontalAlignment="Left">
-            <StackPanel>
-                <TextBlock>Dice number:</TextBlock>
-                <TextBox Name="DiceNumber" Text="{Binding Path=Input, Mode=TwoWay}"/>
-                <TextBlock>Dice sides:</TextBlock>
-                <TextBox Name="DiceSides" Text="{Binding Path=Input2, Mode=TwoWay}"/>
-                <TextBlock>Changer:</TextBlock>
-                <TextBox Name="Changer" Text="{Binding Path=Input3, Mode=TwoWay}"/>
-                <Button Command="{Binding ShakeDice}" Margin="0,20" Content="Shake Dice"/>
-            </StackPanel>
-        </GroupBox>
-        <TextBox HorizontalAlignment="Center" Text="{Binding Path=Text, Mode=TwoWay}" ></TextBox>
-        <ListBox HorizontalAlignment="Right" ItemsSource="{Binding Path=Past}"></ListBox>-->
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="255">
             <Button Command="{Binding InstrumentClickCommand}" Padding="5" Margin="10">
                 <TextBlock>List of instruments</TextBlock>
             </Button>
-            <Button Padding="5" Margin="10">
+            <Button Command="{Binding OrderClickCommand}" Padding="5" Margin="10">
                 <TextBlock>List of orders</TextBlock>
-            </Button>
-            <Button Padding="5" Margin="10">
-                <TextBlock>Change an order's status</TextBlock>
-            </Button>
-            <Button Padding="5" Margin="10">
-                <TextBlock>Create bill</TextBlock>
             </Button>
         </StackPanel>
     </Grid>

@@ -6,14 +6,17 @@ namespace ManagementApplication.ViewModel
     {
         #region Fields
 
-        private InstrumentWindow _newInstrumentWindow;
-        private InstrumentWindowViewModel _newInstrumentWindowViewModel;
+        private InstrumentWindow _instrumentWindow;
+        private InstrumentWindowViewModel _instrumentWindowViewModel;
+        private OrderWindow _orderWindow;
+        private OrderWindowViewModel _orderWindowViewModel;
 
         #endregion
 
         #region Properties
 
         public DelegateCommand InstrumentClickCommand { get; private set; }
+        public DelegateCommand OrderClickCommand { get; private set; }
 
         #endregion
 
@@ -22,6 +25,7 @@ namespace ManagementApplication.ViewModel
         public MainWindowViewModel()
         {
             InstrumentClickCommand = new DelegateCommand(param => OpenInstrumentWindow());
+            OrderClickCommand = new DelegateCommand(param => OpenOrderWindow());
         }
 
         #endregion
@@ -31,9 +35,16 @@ namespace ManagementApplication.ViewModel
 
         private void OpenInstrumentWindow()
         {
-            _newInstrumentWindowViewModel = new InstrumentWindowViewModel();
-            _newInstrumentWindow = new InstrumentWindow(_newInstrumentWindowViewModel);
-            _newInstrumentWindow.Show();
+            _instrumentWindowViewModel = new InstrumentWindowViewModel();
+            _instrumentWindow = new InstrumentWindow(_instrumentWindowViewModel);
+            _instrumentWindow.Show();
+        }
+
+        private void OpenOrderWindow()
+        {
+            _orderWindowViewModel = new OrderWindowViewModel();
+            _orderWindow = new OrderWindow(_orderWindowViewModel);
+            _orderWindow.Show();
         }
 
         #endregion

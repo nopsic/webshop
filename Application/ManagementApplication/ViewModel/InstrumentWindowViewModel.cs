@@ -93,7 +93,7 @@ namespace ManagementApplication.ViewModel
 
             if (await _instrumentRepository.SaveChangesAsync())
             {
-                Window_Loaded();
+                WindowLoaded();
                 NewInstrument = new Instrument();
             }
         }
@@ -111,7 +111,7 @@ namespace ManagementApplication.ViewModel
 
             if (await _instrumentRepository.SaveChangesAsync())
             {
-                Window_Loaded();
+                WindowLoaded();
                 UpdateInstrument = new Instrument();
             }
         }
@@ -133,14 +133,14 @@ namespace ManagementApplication.ViewModel
             else
             {
                 await _instrumentRepository.SaveChangesAsync();
-                Window_Loaded();
+                WindowLoaded();
                 UpdateInstrument = new Instrument();
             }
 
             
         }
 
-        public async void Window_Loaded()
+        public async void WindowLoaded()
         {
             var instruments = await _instrumentRepository.GetAllInstrumentsAsync();
 

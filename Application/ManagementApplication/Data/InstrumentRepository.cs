@@ -82,52 +82,59 @@ namespace ManagementApplication.Data
             return toUpdate;
         }
 
-        public async Task<Instrument[]> GetInstrumentsByTypeAsync(string type)
-        {
-            IQueryable<Instrument> query = _context.Instruments;
-
-            // Query It
-            query = query.Where(c => c.Type == type);
-            // Order It
-            query = query.OrderBy(c => c.Name);
-
-            return await query.ToArrayAsync();
-        }
-
-        public async Task<UserData> GetRegisteredUserAsync(string email)
-        {
-            IQueryable<UserData> query = _context.Users;
-
-            // Query It
-            query = query.Where(c => c.Email == email);
-
-            return await query.FirstOrDefaultAsync();
-        }
-
-        public async Task<Order[]> GetOrderByEmailAsync(string email)
-        {
-            IQueryable<Order> query = _context.Orders;
-
-            // Query It
-            query = query.Where(c => c.Email == email);
-
-            return await query.ToArrayAsync();
-        }
-
         public async Task<bool> SaveChangesAsync()
         {
             // Only return success if at least one row was changed
             return (await _context.SaveChangesAsync()) > 0;
         }
 
-        public async Task<Order> GetLastOrderAsync()
+        public async Task<Order[]> GetOrdersAsync()
         {
             IQueryable<Order> query = _context.Orders;
 
             // Order It
-            query = query.OrderByDescending(c => c.OrderNumber);
+            query = query.OrderBy(c => c.OrderNumber);
 
-            return await query.FirstOrDefaultAsync();
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Order[]> GetOrdersByOrderNumberToSetStatusAsync(int orderNumber, string status)
+        {
+            IQueryable<Order> query = _context.Orders;
+
+            // Query It
+            query = query.Where(c => c.OrderNumber == orderNumber);
+
+            var updateOrder = await query.ToArrayAsync();
+
+            if (updateOrder == null)
+            {
+                return null;
+            }
+
+            foreach (var item in updateOrder)
+            {
+                item.Status = status;
+            }
+
+            return updateOrder;
+        }
+
+        public async Task<Order[]> GetOrdersByOrderNumberAsync(int orderNumber)
+        {
+            IQueryable<Order> query = _context.Orders;
+
+            // Query It
+            query = query.Where(c => c.OrderNumber == orderNumber);
+
+            var orders = await query.ToArrayAsync();
+
+            if (orders == null)
+            {
+                return null;
+            }
+
+            return orders;
         }
     }
 }

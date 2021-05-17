@@ -16,14 +16,11 @@ namespace ManagementApplication.Data
         // Instrument
         Task<Instrument[]> GetAllInstrumentsAsync();
         Task<Instrument> GetInstrumentAsync(string code);
-        Task<Instrument[]> GetInstrumentsByTypeAsync(string type);
         Task<Instrument> UpdateInstrumentAsync(string code, Instrument instrument);
 
-        // Register
-        Task<UserData> GetRegisteredUserAsync(string email);
-
         // Order
-        Task<Order[]> GetOrderByEmailAsync(string email);
-        Task<Order> GetLastOrderAsync();
+        Task<Order[]> GetOrdersAsync();
+        Task<Order[]> GetOrdersByOrderNumberToSetStatusAsync(int orderNumber, string status);
+        Task<Order[]> GetOrdersByOrderNumberAsync(int orderNumber);
     }
 }

@@ -22,5 +22,30 @@ namespace ManagementApplication.Data
         public string BillingAddress { get; set; }
         public DateTime Date { get; set; }
         public int OrderNumber { get; set; }
+        public string Status { get; set; }
+
+        public Order()
+        {
+
+        }
+
+        public Order(Order order)
+        {
+            this.OrderId = order.OrderId;
+            this.FirstName = order.FirstName;
+            this.LastName = order.LastName;
+            this.Email = order.Email;
+            this.InstrumentName = order.InstrumentName;
+            this.Code = order.Code;
+            this.Price = order.Price;
+            this.Quantity = order.Quantity;
+            this.BillingCity = order.BillingCity;
+            this.BillingState = order.BillingState;
+            this.BillingPostalCode = order.BillingPostalCode;
+            this.BillingAddress = order.BillingAddress;
+            this.Date = order.Date;
+            this.OrderNumber = order.OrderNumber;
+            this.Status = order.Status;
+        }
     }
 }

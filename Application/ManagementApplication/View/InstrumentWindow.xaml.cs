@@ -16,7 +16,7 @@ namespace ManagementApplication.View
             _instrumentWindowViewModel = instrumentWindowViewModel;
             this.DataContext = instrumentWindowViewModel;
             InitializeComponent();
-            (this.DataContext as InstrumentWindowViewModel).Window_Loaded();
+            (this.DataContext as InstrumentWindowViewModel).WindowLoaded();
         }
 
         private void Delete_Button_Click(object sender, RoutedEventArgs e)
