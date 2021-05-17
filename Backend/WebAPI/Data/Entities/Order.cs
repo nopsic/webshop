@@ -18,5 +18,6 @@ namespace WebAPI.Data.Entities
         public string BillingAddress { get; set; }
         public DateTime Date { get; set; }
         public int OrderNumber { get; set; }
+        public string Status { get; set; }
     }
 }
