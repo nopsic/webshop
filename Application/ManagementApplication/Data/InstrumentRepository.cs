@@ -42,14 +42,25 @@ namespace ManagementApplication.Data
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Instrument> UpdateInstrumentAsync(string code, Instrument instrument)
+        public async Task<Instrument> GetInstrumenByIdtAsync(int id)
         {
-            if (string.IsNullOrEmpty(code))
+
+            IQueryable<Instrument> query = _context.Instruments;
+
+            // Query It
+            query = query.Where(c => c.InstrumentId == id);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Instrument> UpdateInstrumentAsync(int id, Instrument instrument)
+        {
+            if (id == 0)
             {
-                code = instrument.Code;
+                id = instrument.InstrumentId;
             }
 
-            var toUpdate = await GetInstrumentAsync(code);
+            var toUpdate = await GetInstrumenByIdtAsync(id);
 
             if (toUpdate == null)
             {
@@ -65,18 +76,19 @@ namespace ManagementApplication.Data
             }
 
             if (instrument.Name == "" || instrument.Code == "" || instrument.Price < 0 || instrument.Description == ""
-                || instrument.Rating < 0 || instrument.Quantity < 0 || instrument.PictureName == "" || instrument.Type == "")
+                || instrument.Rating < 0 || instrument.Quantity < 0 || instrument.Type == "" || instrument.Image == null)
             {
                 return null;
             }
 
             toUpdate.InstrumentId = instrument.InstrumentId;
+            toUpdate.Name = instrument.Name;
             toUpdate.Code = instrument.Code;
             toUpdate.Price = instrument.Price;
             toUpdate.Description = instrument.Description;
             toUpdate.Rating = instrument.Rating;
             toUpdate.Quantity = instrument.Quantity;
-            toUpdate.PictureName = instrument.PictureName;
+            toUpdate.Image = instrument.Image;
             toUpdate.Type = instrument.Type;
 
             return toUpdate;

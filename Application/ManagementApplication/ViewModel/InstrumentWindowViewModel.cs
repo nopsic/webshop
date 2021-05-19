@@ -1,7 +1,10 @@
 ﻿using ManagementApplication.Data;
 using Microsoft.AspNetCore.Routing;
+using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Windows.Media.Imaging;
 
 namespace ManagementApplication.ViewModel
 {
@@ -12,7 +15,7 @@ namespace ManagementApplication.ViewModel
         private readonly InstrumentRepository _instrumentRepository = new InstrumentRepository();
         private Instrument _newInstrument;
         private Instrument _updateInstrument;
-        private string _selectedCode = "";
+        private int _selectedId = 0;
         private ObservableCollection<Instrument> _collection;
 
         #endregion
@@ -44,7 +47,7 @@ namespace ManagementApplication.ViewModel
             set
             {
                 _newInstrument = value;
-                _newInstrument.Code = _selectedCode;
+                _newInstrument.InstrumentId = _selectedId;
                 OnPropertyChanged("NewInstrument");
             }
         }
@@ -124,7 +127,7 @@ namespace ManagementApplication.ViewModel
         public async void UpdateSelectedInstrument(Instrument instrument)
         {
 
-            var updatedInstrument = await _instrumentRepository.UpdateInstrumentAsync(_selectedCode, instrument);
+            var updatedInstrument = await _instrumentRepository.UpdateInstrumentAsync(_selectedId, instrument);
 
             if (updatedInstrument == null)
             {
@@ -138,6 +141,46 @@ namespace ManagementApplication.ViewModel
             }
 
             
+        }
+
+        public async void SaveImage(Uri uri)
+        {
+            byte[] image = null;
+
+            FileStream stream = new FileStream(uri.OriginalString, FileMode.Open, FileAccess.Read);
+            BinaryReader binaryReader = new BinaryReader(stream);
+
+            image = binaryReader.ReadBytes((int)stream.Length);
+            NewInstrument.Image = image;
+        }
+
+        public BitmapImage GetImage(byte[] array)
+        {
+            if (array == null)
+            {
+                return null;
+            }
+
+            using (var ms = new MemoryStream(array))
+            {
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad; // here
+                image.StreamSource = ms;
+                image.EndInit();
+                return image;
+            }
+        }
+
+        public void UpdateImage(Uri uri)
+        {
+            byte[] image = null;
+
+            FileStream stream = new FileStream(uri.OriginalString, FileMode.Open, FileAccess.Read);
+            BinaryReader binaryReader = new BinaryReader(stream);
+
+            image = binaryReader.ReadBytes((int)stream.Length);
+            UpdateInstrument.Image = image;
         }
 
         public async void WindowLoaded()

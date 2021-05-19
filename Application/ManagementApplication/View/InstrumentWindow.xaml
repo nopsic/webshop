@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementApplication.View"
         mc:Ignorable="d"
-        Title="InstrumentWindow" Height="926" Width="1350" Background="#f7c64b">
+        Title="InstrumentWindow" Height="1100" Width="1350" Background="#f7c64b">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -24,7 +24,7 @@
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
                 <DataGridTextColumn Header="Rating" Binding="{Binding Rating}"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
-                <DataGridTextColumn Header="PictureName" Binding="{Binding PictureName}"/>
+                <DataGridTextColumn Header="Image" Binding="{Binding Image}"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
 
                 <DataGridTemplateColumn Header="Update Product">
@@ -74,6 +74,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" Content="Name"/>
@@ -94,8 +95,8 @@
                         <Label Grid.Row="5" Grid.Column="0" Content="Quantity"/>
                         <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding NewInstrument.Quantity}"/>
 
-                        <Label Grid.Row="6" Grid.Column="0" Content="PictureName"/>
-                        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding NewInstrument.PictureName}"/>
+                        <Label Grid.Row="6" Grid.Column="0" Content="Image"/>
+                        <Button Grid.Row="6" Grid.Column="1" Click="Image_Button_Click" Content="Add image"></Button>
 
                         <Label Grid.Row="7" Grid.Column="0" Content="Type"/>
                         <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding NewInstrument.Type}"/>
@@ -103,6 +104,8 @@
                         <Button Command="{Binding NewInstrumentClickCommand}" Grid.Row="8" Grid.ColumnSpan="2" Content="Add" Margin="5"/>
 
                     </Grid>
+
+                    <Image x:Name="SelectedImage" Width="100"></Image>
 
                 </StackPanel>
             </Border>
@@ -148,8 +151,8 @@
                         <Label Grid.Row="5" Grid.Column="0" Content="Quantity"/>
                         <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding UpdateInstrument.Quantity}"/>
 
-                        <Label Grid.Row="6" Grid.Column="0" Content="PictureName"/>
-                        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding UpdateInstrument.PictureName}"/>
+                        <Label Grid.Row="6" Grid.Column="0" Content="Image"/>
+                        <Button Grid.Row="6" Grid.Column="1" Click="Update_Image_Button_Click" Content="Add image"></Button>
 
                         <Label Grid.Row="7" Grid.Column="0" Content="Type"/>
                         <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding UpdateInstrument.Type}"/>
@@ -157,6 +160,8 @@
                         <Button Command="{Binding UpdateCommand}" Grid.Row="8" Grid.ColumnSpan="2" Content="Update" Margin="5"/>
 
                     </Grid>
+
+                    <Image x:Name="UpdateImage" Width="100"></Image>
 
                 </StackPanel>
             </Border>

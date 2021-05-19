@@ -9,7 +9,7 @@
         public string Description { get; set; }
         public double Rating { get; set; }
         public int Quantity { get; set; }
-        public string PictureName { get; set; }
+        public byte[] Image { get; set; }
         public string Type { get; set; }
 
         public Instrument()
@@ -26,7 +26,7 @@
             this.Description = instrument.Description;
             this.Rating = instrument.Rating;
             this.Quantity = instrument.Quantity;
-            this.PictureName = instrument.PictureName;
+            this.Image = instrument.Image;
             this.Type = instrument.Type;
         }
     }
