@@ -27,8 +27,7 @@ table {
 }
 
 img {
-  width: 100px;
-  height: 100px;
+  height: 200px;
 }
 
 th.mat-sort-header-sorted {

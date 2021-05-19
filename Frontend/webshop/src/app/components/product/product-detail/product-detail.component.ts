@@ -76,7 +76,7 @@ export class ProductDetailComponent implements OnInit {
         price: 0,
         description: '',
         rating: 0,
-        pictureName: '',
+        image: null,
         quantity: 0,
         type: ''
       }

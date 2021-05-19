@@ -44,7 +44,7 @@
         <img class='center-block img-responsive'
              [style.width.px]='200'
              [style.margin.px]='2'
-             [src]='product.pictureName'
+             [src]="'data:image/png;base64,' +  product.image"
              [title]='product.name'>
       </div>
     </div>
