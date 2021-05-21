@@ -67,7 +67,7 @@ export class ProductDetailComponent implements OnInit {
     return this.product.quantity;
   }
 
-  addToChart() {
+  addToCart() {
     if (!this.quantityControl.invalid) {
       let myProduct = {
         instrumentId: 0,
