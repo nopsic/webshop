@@ -14,26 +14,11 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  cache = null;
-
   getProducts(): Observable<IProduct[]> {
-    if (this.cache === null) {
-      this.cache = this.requestProducts().pipe(
-        shareReplay(1)
-      );
-    }
-
-    console.log("Returning cached value!");
-    return this.cache;
-  }
-
-  requestProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(`${environment.apiURL}` + `${this.productUrl}`)
       .pipe(
         tap(data => console.log('All: ' + JSON.stringify(data))),
-        catchError(err => {this.cache = null;
-          return EMPTY;
-        })
+        catchError(this.handleError)
       );
   }
 
