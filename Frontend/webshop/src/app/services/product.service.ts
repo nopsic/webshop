@@ -1,9 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { EMPTY, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { IProduct } from '../components/product/product';
-import { tap, catchError, map } from 'rxjs/operators';
+import { tap, catchError, map, shareReplay } from 'rxjs/operators';
 
 
 @Injectable({
@@ -14,17 +14,29 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  cache = null;
+
   getProducts(): Observable<IProduct[]> {
+    if (this.cache === null) {
+      this.cache = this.requestProducts().pipe(
+        shareReplay(1)
+      );
+    }
+
+    console.log("Returning cached value!");
+    return this.cache;
+  }
+
+  requestProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(`${environment.apiURL}` + `${this.productUrl}`)
       .pipe(
         tap(data => console.log('All: ' + JSON.stringify(data))),
-        catchError(this.handleError)
+        catchError(err => {this.cache = null;
+          return EMPTY;
+        })
       );
   }
 
-  // Get one product
-  // Since we are working with a json file, we can only retrieve all products
-  // So retrieve all products and then find the one we want using 'map'
   getProduct(code: string): Observable<IProduct | undefined> {
     return this.getProducts()
       .pipe(
