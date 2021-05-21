@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { CustomerService } from '../../services/customer.service';
 import { DeleteDialogComponent } from '../dialog/delete-dialog/delete-dialog.component';
 import { ICustomer } from '../shared/customer/customer';
@@ -41,7 +42,7 @@ export class ProfileComponent implements OnInit {
       if (result === "yes") {
         this.showProgress = true;
 
-        this.http.delete("http://localhost:6600/api/customers/" + sessionStorage.getItem("email"))
+        this.http.delete(`${environment.apiURL}` + "/api/customers/" + sessionStorage.getItem("email"))
           .subscribe(response => {
             sessionStorage.removeItem("jwt");
             sessionStorage.removeItem("email");

@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { ViewChild } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 function notTheSameControlValues(controlName1: string, controlName2: string){
   return (formGroup: FormGroup) => {
@@ -93,7 +94,7 @@ export class ShoppingCartComponent implements OnInit {
 
   orderCheck(): void {
     this.showProgress = true;
-    this.http.post("http://localhost:6600/api/instruments/quantity", this.products)
+    this.http.post(`${environment.apiURL}` + "/api/instruments/quantity", this.products)
       .subscribe( response => {
         this.placeOrder();
       }, err => {
@@ -117,7 +118,7 @@ export class ShoppingCartComponent implements OnInit {
 
     let jsonConcat = json2.concat(json1);
 
-    this.http.post("http://localhost:6600/api/orders/" + sessionStorage.getItem("email") + "/" + this.products.length, jsonConcat)
+    this.http.post(`${environment.apiURL}` + "/api/orders/" + sessionStorage.getItem("email") + "/" + this.products.length, jsonConcat)
       .subscribe( response => {
         window.alert("Your order was registered! Thank you!");
         this.showProgress = false;

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { CustomerService } from '../../services/customer.service';
 
 @Component({
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
       'password': this.loginForm.value.password
     }
 
-    this.http.post("http://localhost:6600/api/customers/login", credentials)
+    this.http.post(`${environment.apiURL}` + "/api/customers/login", credentials)
       .subscribe(response => {
         const token = (<any>response).token;
         sessionStorage.setItem("jwt", token);

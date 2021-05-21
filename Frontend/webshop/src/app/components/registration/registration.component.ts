@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 function notTheSameControlValues(controlName1: string, controlName2: string){
   return (formGroup: FormGroup) => {
@@ -65,7 +66,7 @@ export class RegistrationComponent implements OnInit {
       'password': this.registerForm.value.password,
     }
 
-    this.http.post("http://localhost:6600/api/customers/register", userData)
+    this.http.post(`${environment.apiURL}` + "/api/customers/register", userData)
       .subscribe( response => {
         this.showProgress = false;
           this.router.navigate(["/"]);
