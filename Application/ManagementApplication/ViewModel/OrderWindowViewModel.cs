@@ -4,6 +4,7 @@ using ManagementApplication.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -112,18 +113,18 @@ namespace ManagementApplication.ViewModel
             const string fromPassword = "Qwerty49";
             string subject = $"Bill - #{orders[0].OrderNumber}";
 
-            string body = $"Thank you for your purchase, {orders[0].FirstName} {orders[0].LastName}! Here is your list of order: \n\n" +
-                $"Billing City: {orders[0].BillingCity}\nBilling State: {orders[0].BillingState}\nBilling Postal Code: {orders[0].BillingPostalCode}" +
-                $"Billing Address: {orders[0].BillingAddress}\n\n";
+            string body = $"Thank you for your purchase, {orders[0].FirstName} {orders[0].LastName}!\n\n" +
+                $"Billing City: {orders[0].BillingCity}\nBilling State: {orders[0].BillingState}\nBilling Postal Code: {orders[0].BillingPostalCode}\n" +
+                $"Billing Address: {orders[0].BillingAddress}\n\nHere is your list of order: \n\n";
 
             int total = 0;
 
             foreach (var item in orders)
             {
-                body += $"Instrument: {item.InstrumentName}, Instrument Code: {item.Code}, Quantity: {item.Quantity}, Price: {item.Price} Ft\n";
+                body += $"Instrument: {item.InstrumentName}, Instrument Code: {item.Code}, Quantity: {item.Quantity}, Price: {item.Price.ToString("N0", new CultureInfo("hu-HU"))} Ft\n";
                 total += item.Price;
             }
-            body += $"\nTotal: {total} Ft\n\nBest regards,\nWebshop team";
+            body += $"\nTotal: {total.ToString("N0", new CultureInfo("hu-HU"))} Ft\n\nBest regards,\nWebshop team";
 
             SmtpClient Client = new SmtpClient()
             {
