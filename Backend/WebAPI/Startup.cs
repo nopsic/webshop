@@ -75,6 +75,9 @@ namespace WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHsts();
+            app.UseHttpsRedirection();
+
             app.UseCors("EnableCORS");
 
             app.UseRouting();
