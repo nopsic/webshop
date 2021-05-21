@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ManagementApplication.ViewModel
@@ -96,7 +97,8 @@ namespace ManagementApplication.ViewModel
 
             if (await _instrumentRepository.SaveChangesAsync())
             {
-                WindowLoaded();
+                WindowLoaded(); 
+                MessageBox.Show("Added Successfully", "Done");
                 NewInstrument = new Instrument();
             }
         }
@@ -115,6 +117,7 @@ namespace ManagementApplication.ViewModel
             if (await _instrumentRepository.SaveChangesAsync())
             {
                 WindowLoaded();
+                MessageBox.Show("Deleted Successfully", "Done");
                 UpdateInstrument = new Instrument();
             }
         }
@@ -136,6 +139,7 @@ namespace ManagementApplication.ViewModel
             else
             {
                 await _instrumentRepository.SaveChangesAsync();
+                MessageBox.Show("Updated Successfully", "Done");
                 WindowLoaded();
                 UpdateInstrument = new Instrument();
             }
@@ -143,7 +147,7 @@ namespace ManagementApplication.ViewModel
             
         }
 
-        public async void SaveImage(Uri uri)
+        public void SaveImage(Uri uri)
         {
             byte[] image = null;
 

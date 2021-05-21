@@ -24,13 +24,12 @@
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
                 <DataGridTextColumn Header="Rating" Binding="{Binding Rating}"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
-                <DataGridTextColumn Header="Image" Binding="{Binding Image}"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}"/>
 
                 <DataGridTemplateColumn Header="Update Product">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Edit" Click="Edit_Button_Click"/>
+                            <Button Content="Select to edit" Click="Edit_Button_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
