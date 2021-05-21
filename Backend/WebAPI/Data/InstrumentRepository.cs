@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Data.Entities;
@@ -67,12 +66,45 @@ namespace WebAPI.Data
             return await query.ToArrayAsync();
         }
 
+        public async Task<UserData> GetRegisteredUserAsync(string email)
+        {
+            _logger.LogInformation($"Getting an User by email: {email}");
+            IQueryable<UserData> query = _context.Users;
+
+            // Query It
+            query = query.Where(c => c.Email == email);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Order[]> GetOrderByEmailAsync(string email)
+        {
+            _logger.LogInformation($"Getting an Orders by email: {email}");
+            IQueryable<Order> query = _context.Orders;
+
+            // Query It
+            query = query.Where(c => c.Email == email);
+
+            return await query.ToArrayAsync();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             _logger.LogInformation($"Attempitng to save the changes in the context");
 
             // Only return success if at least one row was changed
             return (await _context.SaveChangesAsync()) > 0;
+        }
+
+        public async Task<Order> GetLastOrderAsync()
+        {
+            _logger.LogInformation($"Getting last Order");
+            IQueryable<Order> query = _context.Orders;
+
+            // Order It
+            query = query.OrderByDescending(c => c.OrderNumber);
+
+            return await query.FirstOrDefaultAsync();
         }
     }
 }

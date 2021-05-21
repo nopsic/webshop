@@ -1,3 +1,35 @@
-.mat-form-field {
-  margin-top: 16px;
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  padding: 30px;
+}
+
+.div {
+  background-color: rgb(247, 198, 75);
+}
+
+.full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+button {
+  display: inline-block;
+}
+
+.clear {
+  left: 5px;
+}
+
+.error {
+  margin-bottom: 20px;
+}
+
+.register {
+  background-color: whitesmoke;
+  padding: 25px;
 }

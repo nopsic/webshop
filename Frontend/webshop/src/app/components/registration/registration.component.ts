@@ -1,5 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
+function notTheSameControlValues(controlName1: string, controlName2: string){
+  return (formGroup: FormGroup) => {
+      const control1 = formGroup.controls[controlName1];
+      const control2 = formGroup.controls[controlName2];
+
+      if (control2.errors && !control2.errors.different) {
+          return;
+      }
+      if (control1.value !== control2.value) {
+        control2.setErrors({ different: true });
+      } else {
+        control2.setErrors(null);
+      }
+  }
+}
 
 @Component({
   selector: 'app-registration',
@@ -7,18 +26,53 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  isEditable = false;
+  registerForm: FormGroup;
+  emailInput: string = '';
+  showProgress: boolean = false;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
+  }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+    this.registerForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      confirmEmail: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
+    }, {
+      validator: [notTheSameControlValues('password', 'confirmPassword'), notTheSameControlValues('email', 'confirmEmail')]
     });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+  }
+
+  clear() {
+    this.registerForm.patchValue({
+      firstName: "",
+      lastName: "",
+      email: "",
+      confirmEmail: "",
+      password: "",
+      confirmPassword: ""
     });
+  }
+
+  onSubmit() {
+    this.showProgress = true;
+    const userData = {
+      'firstname': this.registerForm.value.firstName,
+      'lastname': this.registerForm.value.lastName,
+      'email': this.registerForm.value.email,
+      'password': this.registerForm.value.password,
+    }
+
+    this.http.post(`${environment.apiURL}` + "/api/customers/register", userData)
+      .subscribe( response => {
+        this.showProgress = false;
+          this.router.navigate(["/"]);
+          window.alert("Your registration was successful!");
+      }, err => {
+        window.alert("This email has been already registered");
+      })
   }
 }

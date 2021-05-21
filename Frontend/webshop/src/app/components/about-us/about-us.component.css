@@ -1,0 +1,11 @@
+div {
+  margin: 10px;
+}
+
+mat-grid-list {
+  background-color:rgb(247, 198, 75);
+}
+
+mat-list-item {
+  background-color:wheat;
+}

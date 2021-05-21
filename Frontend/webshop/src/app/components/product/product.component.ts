@@ -39,7 +39,7 @@ export class ProductComponent implements OnInit {
     price: 0,
     description: '',
     rating: 0,
-    pictureName: '',
+    image: null,
     type: '',
     quantity: 0
   };
@@ -73,6 +73,7 @@ export class ProductComponent implements OnInit {
     this.sub = this.productService.getProducts().subscribe({
       next: products => {
         this.products = products;
+        console.log(this.products[0].image);
         this.dataSource = new MatTableDataSource(this.products);
         this.dataSource.paginator = this.paginator.toArray()[0];
         this.dataSource.sort = this.sort.toArray()[0];
@@ -110,6 +111,7 @@ export class ProductComponent implements OnInit {
   getProductsBySelectedTab(tabIndex: number) {
     if(tabIndex == 0) {
       this.showMatProgress = true;
+      this.dataSource = new MatTableDataSource([]);
       this.sub = this.productService.getProducts().subscribe({
         next: products => {
           this.products = products;
@@ -120,11 +122,15 @@ export class ProductComponent implements OnInit {
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
         },
-        error: err => this.errorMessage
+        error: err => {
+          this.errorMessage = err;
+          this.showMatProgress = false;
+        }
       });
     }
     else if(tabIndex == 1) {
       this.showMatProgress = true;
+      this.dataSource = new MatTableDataSource([]);
       this.sub = this.productService.getProductsByType("brass").subscribe({
         next: products => {
           this.products = products;
@@ -135,11 +141,15 @@ export class ProductComponent implements OnInit {
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
         },
-        error: err => this.errorMessage
+        error: err => {
+          this.errorMessage = err;
+          this.showMatProgress = false;
+        }
       });
     }
     else if(tabIndex == 2) {
       this.showMatProgress = true;
+      this.dataSource = new MatTableDataSource([]);
       this.sub = this.productService.getProductsByType("woodwind").subscribe({
         next: products => {
           this.products = products;
@@ -150,11 +160,15 @@ export class ProductComponent implements OnInit {
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
         },
-        error: err => this.errorMessage
+        error: err => {
+          this.errorMessage = err;
+          this.showMatProgress = false;
+        }
       });
     }
     else if(tabIndex == 3) {
       this.showMatProgress = true;
+      this.dataSource = new MatTableDataSource([]);
       this.sub = this.productService.getProductsByType("percussion").subscribe({
         next: products => {
           this.products = products;
@@ -165,11 +179,15 @@ export class ProductComponent implements OnInit {
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
         },
-        error: err => this.errorMessage
+        error: err => {
+          this.errorMessage = err;
+          this.showMatProgress = false;
+        }
       });
     }
     else if(tabIndex == 4) {
       this.showMatProgress = true;
+      this.dataSource = new MatTableDataSource([]);
       this.sub = this.productService.getProductsByType("string").subscribe({
         next: products => {
           this.products = products;
@@ -180,7 +198,10 @@ export class ProductComponent implements OnInit {
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
         },
-        error: err => this.errorMessage
+        error: err => {
+          this.errorMessage = err;
+          this.showMatProgress = false;
+        }
       });
     }
   }

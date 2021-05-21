@@ -3,7 +3,7 @@
   padding: 10px;
 }
 
-.add-to-chart {
+.add-to-cart {
   text-align: center;
   left: 40px;
   background-color: rgb(19, 202, 156);
@@ -30,6 +30,6 @@
 }
 
 .card {
-  background-color: goldenrod;
+  background-color: rgb(247, 198, 75);
   font-weight: 500;
 }

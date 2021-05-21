@@ -1,0 +1,27 @@
+.button {
+  border: none;
+  color: rgb(179, 31, 31);
+  padding: 15px 32px;
+  text-align: center;
+  width: 150px;
+  margin: 20px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}
+
+.grid {
+  background-color:rgb(247, 198, 75);
+}
+
+.leftGrid {
+  background-color:wheat;
+  padding: 25px;
+  padding-bottom: 120px;
+}
+
+img {
+  padding-top: 100px;
+  padding-left: 170px;
+  width: 350px;
+}

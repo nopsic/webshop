@@ -1,1 +1,189 @@
-<p>shopping-cart works!</p>
+<mat-horizontal-stepper #stepper class="stepper">
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <div>
+        <mat-form-field class="width">
+          <mat-label>First name</mat-label>
+          <input matInput placeholder="First name" formControlName="firstName" required>
+          <mat-error *ngIf="firstFormGroup.get('firstName').errors?.required">
+            This field is mandatory to fill.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.get('firstName').errors?.minlength">
+            The minimum length is 2 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="width">
+          <mat-label>Last name</mat-label>
+          <input matInput placeholder="Last name" formControlName="lastName" required>
+          <mat-error *ngIf="firstFormGroup.get('lastName').errors?.required">
+            This field is mandatory to fill.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.get('lastName').errors?.minlength">
+            The minimum length is 2 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Not everything is filled out correctly.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Email</ng-template>
+      <div>
+        <mat-form-field class="width">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email" required>
+          <mat-error *ngIf="secondFormGroup.get('email').errors?.required">
+            This field is mandatory to fill.
+          </mat-error>
+          <mat-error *ngIf="secondFormGroup.get('email').errors?.email">
+            It must be a valid email.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="width">
+          <mat-label>Confirm email</mat-label>
+          <input name="email" matInput formControlName="confirmEmail" required>
+          <mat-error class="error" *ngIf="secondFormGroup.get('confirmEmail').errors?.different">
+            The emails are not the same.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup" errorMessage="Not everything is filled out correctly.">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Billing address</ng-template>
+      <div>
+        <mat-form-field class="width">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="Ex. Pécs" formControlName="billingCity" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="width">
+          <mat-label>State</mat-label>
+          <input matInput placeholder="Ex. Baranya" formControlName="billingState" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="width">
+          <mat-label>Postal Code</mat-label>
+          <input matInput #postalCode maxlength="4" placeholder="Ex. 7630"
+            formControlName="billingPostalCode" required>
+          <mat-hint align="end">{{postalCode.value.length}} / 4</mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="width">
+          <mat-label>Address</mat-label>
+          <textarea matInput placeholder="Ex. Széchenyi Street 48/a"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          formControlName="billingAddress"
+          maxlength="140"
+          required>
+          </textarea>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="cartItemFormGroup" errorMessage="Name is required.">
+    <form [formGroup]="cartItemFormGroup">
+      <ng-template matStepLabel>Finalize your order</ng-template>
+      <div class="mat-elevation-z8" *ngIf="products.length !== 0">
+        <table mat-table matTableFilter [dataSource]="dataSource">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"><a [routerLink]="['/products/code', element.code]"> {{element.name}} </a></td>
+          </ng-container>
+        
+          <!-- Code Column -->
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef> Code </th>
+            <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+          </ng-container>
+
+          <!-- Minus Column -->
+          <ng-container matColumnDef="minus">
+            <th mat-header-cell *matHeaderCellDef> Minus one </th>
+            <td mat-cell *matCellDef="let element">
+              <button type="button" class="icon-minus" mat-mini-fab (click)="minusOne(element)" [disabled]="element.quantity < 2">
+                <mat-icon>exposure_neg_1</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+          </ng-container>
+
+          <!-- Plus Column -->
+          <ng-container matColumnDef="plus">
+            <th mat-header-cell *matHeaderCellDef> Minus one </th>
+            <td mat-cell *matCellDef="let element">
+              <button type="button" class="icon-plus" mat-mini-fab color="primary" (click)="plusOne(element)">
+                <mat-icon>exposure_plus_1</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+        
+          <!-- Price Column -->
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.price * element.quantity | currency:'HUF':'symbol':'1.2-2'}} </td>
+          </ng-container>
+
+          <!-- Delete Column -->
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let element"> 
+              <button type="button" class="icon-delete" mat-mini-fab color="warn" (click)="deleteItem(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <div *ngIf="products.length === 0"><h2>Your cart is empty.</h2></div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button *ngIf="products.length !== 0" mat-button 
+          [disabled]="firstFormGroup.invalid || secondFormGroup.invalid || thirdFormGroup.invalid"
+         (click)="orderCheck()">Order</button>
+        <button mat-button (click)="reset();stepper.reset()">Reset All</button>
+      </div>
+      <div *ngIf="showProgress">
+        <mat-card class="progress-bar">
+          <mat-card-content>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>

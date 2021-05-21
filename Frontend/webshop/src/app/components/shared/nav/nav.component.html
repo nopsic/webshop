@@ -11,11 +11,11 @@
   </a>
   <a mat-button routerLink="products">Products</a>
   <a mat-button routerLink="aboutus">About us</a>
-  <a mat-button routerLink="aboutus">
-    <mat-icon aria-hidden="false" aria-label="Example home icon">
+  <a mat-button routerLink="shoppingcart">
+    <mat-icon [matBadge]="instrumentQuantity" matBadgeColor="warn" aria-hidden="false">
       shopping_cart
     </mat-icon>
   </a>
-  <a *ngIf="signInTitleString === 'Sign in'" mat-raised-button color="secondary" (click)="openDialog()">{{signInTitleString}}</a>
-  <a *ngIf="signInTitleString === 'Profile'" mat-raised-button color="secondary" (click)="openDialog()">{{signInTitleString}}</a>
+  <a *ngIf="isUserAuthenticated()" mat-raised-button color="secondary" (click)="navigateToProfile()">Profile</a>
+  <a *ngIf="!isUserAuthenticated()" mat-raised-button color="secondary" (click)="openDialog()">Sign in</a>
 </mat-toolbar>

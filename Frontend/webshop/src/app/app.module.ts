@@ -24,11 +24,16 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTableFilterModule } from 'mat-table-filter';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog'; 
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { JwtModule } from "@auth0/angular-jwt";
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 import { AppComponent } from './app.component';
 import { StarComponent } from './shared/star.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
-//import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { NavComponent } from './components/shared/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
@@ -37,6 +42,15 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { OrderComponent } from './components/order/order.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { DeleteDialogComponent } from './components/dialog/delete-dialog/delete-dialog.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+
+export function tonkenGetter() {
+  return sessionStorage.getItem("jwt");
+}
 
 const MaterialComponents = [
   MatSidenavModule,
@@ -58,7 +72,12 @@ const MaterialComponents = [
   MatRadioModule,
   MatTableFilterModule,
   MatStepperModule,
-  MatDialogModule
+  MatDialogModule,
+  MatCheckboxModule,
+  MatBadgeModule,
+  MatGridListModule,
+  MatDividerModule,
+  MatListModule
 ]
 
 @NgModule({
@@ -67,14 +86,17 @@ const MaterialComponents = [
     StarComponent,
     FooterComponent,
     NavComponent,
-    //ShoppingCartComponent,
+    ShoppingCartComponent,
     HomeComponent,
     ProductComponent,
     ProductDetailComponent,
     RegistrationComponent,
     OrderComponent,
     DialogComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+    DeleteDialogComponent,
+    AboutUsComponent
   ],
   entryComponents: [DialogComponent],
   imports: [
@@ -84,7 +106,15 @@ const MaterialComponents = [
     MaterialComponents,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CdkStepperModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tonkenGetter,
+        allowedDomains: ["localhost:6600"],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

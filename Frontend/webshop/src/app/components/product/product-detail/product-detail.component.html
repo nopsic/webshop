@@ -44,7 +44,7 @@
         <img class='center-block img-responsive'
              [style.width.px]='200'
              [style.margin.px]='2'
-             [src]='product.pictureName'
+             [src]="'data:image/png;base64,' +  product.image"
              [title]='product.name'>
       </div>
     </div>
@@ -65,7 +65,7 @@
       <button class="icon-plus" mat-mini-fab color="primary" (click)="plusOne()" [disabled]="quantityInput >= product.quantity">
         <mat-icon>exposure_plus_1</mat-icon>
       </button>
-      <button class="add-to-chart" mat-raised-button (click)="addToChart()" [disabled]="!quantityControl.valid">Add to chart</button>
+      <button class="add-to-cart" mat-raised-button (click)="addToCart()" [disabled]="!quantityControl.valid">Add to cart</button>
     </div>
   </div>
 

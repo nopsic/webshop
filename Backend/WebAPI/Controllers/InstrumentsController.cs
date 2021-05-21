@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebAPI.Data;
 using WebAPI.Data.Entities;
@@ -143,6 +144,49 @@ namespace WebAPI.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
             }
+        }
+
+        [HttpPost]
+        [Route("quantity")]
+        public async Task<string> CheckSelectedInstrumentsQuantity([FromBody] Instrument[] instruments)
+        {
+            var allInstruments = await _repository.GetAllInstrumentsAsync();
+
+            List<Instrument> selectedInstruments = new List<Instrument>();
+
+            string errorMessage = "";
+
+            for (int i = 0; i < instruments.Length; i++)
+            {
+                for (int j = 0; j < allInstruments.Length; j++)
+                {
+                    if (instruments[i].Code == allInstruments[j].Code)
+                    {
+                        selectedInstruments.Add(allInstruments[j]);
+                    }
+                }
+            }
+
+            if (selectedInstruments.Count == 0)
+            {
+                return "Failed to find the selected instruments";
+            }
+
+            for (int i = 0; i < instruments.Length; i++)
+            {
+                for (int j = 0; j < selectedInstruments.Count; j++)
+                {
+                    if (instruments[i].Code == selectedInstruments[j].Code)
+                    {
+                        if (instruments[i].Quantity > selectedInstruments[j].Quantity || instruments[i].Quantity < 0)
+                        {
+                            errorMessage += $"There is only {selectedInstruments[j].Quantity} pieces of {instruments[i].Code}\n";
+                        }
+                    }
+                }
+            }
+
+            return errorMessage;
         }
     }
 }

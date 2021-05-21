@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WebAPI.Data.Entities
+﻿namespace WebAPI.Data.Entities
 {
     public class Instrument
     {
@@ -14,7 +9,7 @@ namespace WebAPI.Data.Entities
         public string Description { get; set; }
         public double Rating { get; set; }
         public int Quantity { get; set; }
-        public string PictureName { get; set; }
+        public byte[] Image { get; set; }
         public string Type { get; set; }
     }
 }

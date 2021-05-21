@@ -1,0 +1,22 @@
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.width {
+  width: 15%;
+}
+
+table {
+  width: 100%;
+  background-color:whitesmoke;
+  font-weight: 500;
+}
+
+.stepper {
+  background-color:wheat;
+  padding: 25px;
+}

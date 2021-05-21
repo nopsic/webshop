@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
@@ -10,12 +11,18 @@ import { DialogComponent } from '../../dialog/dialog.component';
 })
 export class NavComponent implements OnInit {
   signInTitleString: string = "Sign in";
+  instrumentQuantity: number = 0;
 
   constructor(public dialog: MatDialog,
-              private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
+    sessionStorage.setItem("instrumentQuantity", this.instrumentQuantity.toString());
+
+    setInterval(() => {
+      this.instrumentQuantity = (Number)(sessionStorage.getItem("instrumentQuantity"));
+    });
   }
 
   openDialog(): void {
@@ -31,12 +38,21 @@ export class NavComponent implements OnInit {
     });
   }
 
-  changeSignInTitleString(): void {
-    if (this.signInTitleString === "Sign in") {
-      this.signInTitleString = "Profile"
+  isUserAuthenticated() {
+    const token: string = sessionStorage.getItem("jwt");
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      return true;
     }
-    else if (this.signInTitleString === "Profile") {
-      this.signInTitleString = "Sign in"
+    else {
+      return false;
     }
+  }
+
+  logOut() {
+    sessionStorage.removeItem("jwt");
+  }
+
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
   }
 }

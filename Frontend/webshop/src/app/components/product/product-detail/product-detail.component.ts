@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormsModule, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { ProductService } from '../../../services/product.service';
 import { IProduct } from '../product';
 
@@ -19,7 +20,8 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private productService: ProductService) {
+              private productService: ProductService,
+              private shoppingCartService: ShoppingCartService) {
   }
 
   ngOnInit(): void {
@@ -65,9 +67,28 @@ export class ProductDetailComponent implements OnInit {
     return this.product.quantity;
   }
 
-  addToChart() {
+  addToCart() {
     if (!this.quantityControl.invalid) {
-      console.log("Added to chart: " + this.product.code + ' with quantity: ' + this.quantityInput);
+      let myProduct = {
+        instrumentId: 0,
+        name: '',
+        code: '',
+        price: 0,
+        description: '',
+        rating: 0,
+        image: null,
+        quantity: 0,
+        type: ''
+      }
+
+      myProduct.instrumentId = this.product.instrumentId;
+      myProduct.name = this.product.name;
+      myProduct.code = this.product.code;
+      myProduct.price = this.product.price;
+
+      myProduct.quantity = Number(this.quantityInput);
+
+      this.shoppingCartService.addItem(myProduct);
     }
   }
 

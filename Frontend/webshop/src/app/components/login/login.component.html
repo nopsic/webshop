@@ -1,31 +1,48 @@
 <mat-toolbar class="header">
-  <span>Login</span>
+  Login
 </mat-toolbar>
-<mat-card class="mat-card">
-   <mat-card-content>
-      <form class="form" [formGroup]="loginForm">
-         <mat-form-field class="full-width">
-            <mat-label>Email</mat-label>
-            <input  matInput name="email" appearance="fill" formControlName="email" required>
-            <mat-error *ngIf="loginForm.get('email').errors?.required">
-              Email is mandatory to fill.
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('email').errors?.email">
-              It must be a valid email.
-            </mat-error>
-         </mat-form-field>
-         <mat-form-field class="full-width">
-            <mat-label>Password</mat-label>
-            <input matInput name="password" appearance="fill" formControlName="password" required type="password">
-            <mat-error *ngIf="loginForm.get('password').errors?.required">
-              Password is mandatory to fill.
-            </mat-error>
-         </mat-form-field>
-      </form>
-   </mat-card-content>
-   <mat-card-actions>
-      <button class="button" mat-raised-button (click)="login()" [disabled]="loginForm.get('password').errors?.required || 
-      loginForm.get('email').errors?.required || loginForm.get('email').errors?.email"
-      >Login</button>
-   </mat-card-actions>
-</mat-card>
+<mat-grid-list cols="5" class="grids">
+   <mat-grid-tile colspan="1" class="side"></mat-grid-tile>
+   <mat-grid-tile colspan="3" class="middle">
+      <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password</div>
+      <mat-card>
+         <mat-card-content>
+            <form class="form" [formGroup]="loginForm">
+               <mat-form-field class="full-width">
+                  <mat-label>Email</mat-label>
+                  <input  matInput name="email" appearance="fill" formControlName="email" required>
+                  <mat-error *ngIf="loginForm.get('email').errors?.required">
+                    Email is mandatory to fill.
+                  </mat-error>
+                  <mat-error *ngIf="loginForm.get('email').errors?.email">
+                    It must be a valid email.
+                  </mat-error>
+               </mat-form-field>
+               <mat-form-field class="full-width">
+                  <mat-label>Password</mat-label>
+                  <input matInput name="password" appearance="fill" formControlName="password" required [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="loginForm.get('password').errors?.required">
+                    Password is mandatory to fill.
+                  </mat-error>
+               </mat-form-field>
+            </form>
+         </mat-card-content>
+         <mat-card-actions>
+            <button class="button" mat-raised-button (click)="login()" [disabled]="loginForm.get('password').errors?.required || 
+            loginForm.get('email').errors?.required || loginForm.get('email').errors?.email"
+            >Login</button>
+         </mat-card-actions>
+         <div>
+            <mat-card class="progress-bar" *ngIf="showProgress">
+              <mat-card-content>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+              </mat-card-content>
+            </mat-card>
+          </div>
+      </mat-card>
+   </mat-grid-tile>
+   <mat-grid-tile colspan="1" class="side"></mat-grid-tile>
+</mat-grid-list>
