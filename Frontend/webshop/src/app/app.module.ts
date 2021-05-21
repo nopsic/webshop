@@ -30,6 +30,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { StarComponent } from './shared/star.component';
@@ -77,7 +78,8 @@ const MaterialComponents = [
   MatBadgeModule,
   MatGridListModule,
   MatDividerModule,
-  MatListModule
+  MatListModule,
+  MatSnackBarModule
 ]
 
 @NgModule({

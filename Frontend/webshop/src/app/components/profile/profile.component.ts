@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { CustomerService } from '../../services/customer.service';
 import { DeleteDialogComponent } from '../dialog/delete-dialog/delete-dialog.component';
 import { ICustomer } from '../shared/customer/customer';

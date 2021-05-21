@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { ViewChild } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 function notTheSameControlValues(controlName1: string, controlName2: string){
   return (formGroup: FormGroup) => {
