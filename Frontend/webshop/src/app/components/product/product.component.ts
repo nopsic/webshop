@@ -30,7 +30,7 @@ export class ProductComponent implements OnInit {
   value = 'Search here';
   errorMessage: string = '';
   sub!: Subscription;
-  displayedColumns: string[] = ['pictureName', 'name', 'code', 'price'];
+  displayedColumns: string[] = ['pictureName', 'name', 'code', 'rating', 'price'];
 
   searchProduct: IProduct = {    
     instrumentId: 0,
