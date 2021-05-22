@@ -40,7 +40,6 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { OrderComponent } from './components/order/order.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -93,7 +92,6 @@ const MaterialComponents = [
     ProductComponent,
     ProductDetailComponent,
     RegistrationComponent,
-    OrderComponent,
     DialogComponent,
     LoginComponent,
     ProfileComponent,
