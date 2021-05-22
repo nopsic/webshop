@@ -112,7 +112,7 @@ namespace ManagementApplication.ViewModel
                 return;
             }
 
-            _instrumentRepository.Delete(instrument);
+            _instrumentRepository.Delete(existing);
 
             if (await _instrumentRepository.SaveChangesAsync())
             {
