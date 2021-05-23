@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { CustomerService } from '../../services/customer.service';
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit {
   showProgress: boolean = false;
 
   constructor(private router: Router, private customerService: CustomerService,
-              public dialog: MatDialog, private http: HttpClient) { }
+              public dialog: MatDialog, private http: HttpClient,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.customerName = this.customerService.getFirstName() + ' ' + this.customerService.getLastName();
@@ -31,6 +33,10 @@ export class ProfileComponent implements OnInit {
     sessionStorage.removeItem("firstName");
     sessionStorage.removeItem("lastName");
     this.router.navigate(['/']);
+    let config = new MatSnackBarConfig();
+    config.panelClass = ["success-style"];
+    config.duration = 3000;
+    this.snackBar.open("You have logged out successfully!", "Close", config);
   }
 
   dialogResponse(): void {
@@ -48,7 +54,10 @@ export class ProfileComponent implements OnInit {
             sessionStorage.removeItem("email");
             sessionStorage.removeItem("firstName");
             sessionStorage.removeItem("lastName");
-            window.alert("You have deleted your account successfully!");
+            let config = new MatSnackBarConfig();
+            config.panelClass = ["success-style"];
+            config.duration = 3000;
+            this.snackBar.open("You have deleted your account successfully!", "Close", config);
             this.router.navigate(['/']);
             this.showProgress = false;
           }, err => {
@@ -56,5 +65,9 @@ export class ProfileComponent implements OnInit {
         })
       }
     });
+  }
+
+  navigateToOrders(): void {
+    this.router.navigate(['/profile-orders']);
   }
 }

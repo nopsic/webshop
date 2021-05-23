@@ -3,7 +3,6 @@
   color: rgb(179, 31, 31);
   padding: 15px 32px;
   text-align: center;
-  width: 150px;
   margin: 20px;
   text-decoration: none;
   display: block;
@@ -24,4 +23,10 @@ img {
   padding-top: 100px;
   padding-left: 170px;
   width: 350px;
+}
+
+::ng-deep .success-style{
+  background-color:rgb(3, 151, 70);
+  color:white;
+  white-space: pre-wrap;
 }
