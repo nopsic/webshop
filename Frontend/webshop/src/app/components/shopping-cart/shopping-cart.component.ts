@@ -135,6 +135,7 @@ export class ShoppingCartComponent implements OnInit {
       .subscribe( response => {
         let config = new MatSnackBarConfig();
         config.panelClass = ["success-style"];
+        config.duration = 3000;
         this.snackBar.open("Your order was registered! Thank you!", "Close", config);
         this.showProgress = false;
         this.reset();
