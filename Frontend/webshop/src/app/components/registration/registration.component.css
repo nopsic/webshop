@@ -33,3 +33,15 @@ button {
   background-color: whitesmoke;
   padding: 25px;
 }
+
+::ng-deep .success-style{
+  background-color:rgb(3, 151, 70);
+  color:white;
+  white-space: pre-wrap;
+}
+
+::ng-deep .custom-style{
+  background-color:brown;
+  color:white;
+  white-space: pre-wrap;
+}
