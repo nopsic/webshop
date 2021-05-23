@@ -20,3 +20,25 @@ table {
   background-color:wheat;
   padding: 25px;
 }
+
+.snackbar {
+  max-width: 90% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 1rem !important; 
+  padding: 10px !important;
+  background-color: green;
+  color: color;
+}
+
+::ng-deep .custom-style{
+  background-color:brown;
+  color:white;
+  white-space: pre-wrap;
+}
+
+::ng-deep .success-style{
+  background-color:rgb(3, 151, 70);
+  color:white;
+  white-space: pre-wrap;
+}

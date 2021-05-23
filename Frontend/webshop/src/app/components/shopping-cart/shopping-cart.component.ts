@@ -10,6 +10,7 @@ import { ViewChild } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 function notTheSameControlValues(controlName1: string, controlName2: string){
   return (formGroup: FormGroup) => {
@@ -52,7 +53,7 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private customerService: CustomerService,
               private cartService: ShoppingCartService, private http: HttpClient,
-              private router: Router) {}
+              private router: Router, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.firstFormGroup = this.fb.group({
@@ -98,7 +99,9 @@ export class ShoppingCartComponent implements OnInit {
       .subscribe( response => {
         this.placeOrder();
       }, err => {
-        window.alert(err.error.text);
+        let config = new MatSnackBarConfig();
+        config.panelClass = ["custom-style"];
+        this.snackBar.open(err.error.text, "Close", config);
         this.showProgress = false;
       })
   }
@@ -118,14 +121,27 @@ export class ShoppingCartComponent implements OnInit {
 
     let jsonConcat = json2.concat(json1);
 
-    this.http.post(`${environment.apiURL}` + "/api/orders/" + sessionStorage.getItem("email") + "/" + this.products.length, jsonConcat)
+    let email = "";
+
+    if (sessionStorage.getItem("email") === null) {
+      email = this.secondFormGroup.get("email").value;
+    } else {
+      email = sessionStorage.getItem("email");
+    }
+
+    let userData = email + ";" +  this.firstFormGroup.get("firstName").value + ";" +  this.firstFormGroup.get("lastName").value;
+
+    this.http.post(`${environment.apiURL}` + "/api/orders/" + userData + "/" + this.products.length, jsonConcat)
       .subscribe( response => {
-        window.alert("Your order was registered! Thank you!");
+        let config = new MatSnackBarConfig();
+        config.panelClass = ["success-style"];
+        this.snackBar.open("Your order was registered! Thank you!", "Close", config);
         this.showProgress = false;
         this.reset();
         this.router.navigate(["/"]);
       }, err => {
         console.log(err);
+        this.showProgress = false;
       })
   }
 
