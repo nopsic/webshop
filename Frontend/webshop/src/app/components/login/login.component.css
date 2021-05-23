@@ -19,3 +19,15 @@
 .button {
   background-color: rgb(14, 179, 77);
 }
+
+::ng-deep .custom-style{
+  background-color:brown;
+  color:white;
+  white-space: pre-wrap;
+}
+
+::ng-deep .success-style{
+  background-color:rgb(3, 151, 70);
+  color:white;
+  white-space: pre-wrap;
+}

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { CustomerService } from '../../services/customer.service';
@@ -12,11 +13,11 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  invalidLogin: boolean;
   hide: boolean = true;
   showProgress: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private customerService: CustomerService) { }
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, 
+              private customerService: CustomerService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -40,13 +41,19 @@ export class LoginComponent implements OnInit {
       .subscribe(response => {
         const token = (<any>response).token;
         sessionStorage.setItem("jwt", token);
-        this.invalidLogin = false;
         sessionStorage.setItem("email", credentials.email);
         this.customerService.getCustomerData();
         this.router.navigate(["/"]);
+        let config = new MatSnackBarConfig();
+        config.panelClass = ["success-style"];
+        config.duration = 3000;
+        this.snackBar.open("Successfully logged in", "Close", config);
         this.showProgress = false;
       }, err => {
-        this.invalidLogin = true;
+        let config = new MatSnackBarConfig();
+        config.panelClass = ["custom-style"];
+        this.snackBar.open("Wrong email or password", "Close", config);
+        this.showProgress = false;
       })
   }
 }
