@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementApplication.View"
         mc:Ignorable="d"
-        Title="UpdateInstrument" Height="926" Width="1350" Background="#f7c64b">
+        Title="Orders" Height="926" Width="1350" Background="#f7c64b">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,13 +21,13 @@
                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
-                <DataGridTextColumn Header="InstrumentName" Binding="{Binding InstrumentName}"/>
+                <DataGridTextColumn Header="Instrument Name" Binding="{Binding InstrumentName}"/>
                 <DataGridTextColumn Header="Code" Binding="{Binding Code}"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
                 <DataGridTextColumn Header="Billing City" Binding="{Binding BillingCity}"/>
                 <DataGridTextColumn Header="Billing State" Binding="{Binding BillingState}"/>
-                <DataGridTextColumn Header="Billing PostalCode" Binding="{Binding BillingPostalCode}"/>
+                <DataGridTextColumn Header="Billing Postal Code" Binding="{Binding BillingPostalCode}"/>
                 <DataGridTextColumn Header="Billing Address" Binding="{Binding BillingAddress}"/>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
                 <DataGridTextColumn Header="OrderNumber" Binding="{Binding OrderNumber}"/>

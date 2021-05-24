@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementApplication.View"
         mc:Ignorable="d"
-        Title="InstrumentWindow" Height="1100" Width="1350" Background="#f7c64b">
+        Title="Instruments" Height="1100" Width="1350" Background="#f7c64b">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
