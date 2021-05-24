@@ -93,6 +93,11 @@ namespace ManagementApplication.ViewModel
                 return;
             }
 
+            if (NewInstrument.Image == null)
+            {
+                return;
+            }
+
             _instrumentRepository.Add(NewInstrument);
 
             if (await _instrumentRepository.SaveChangesAsync())

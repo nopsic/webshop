@@ -136,7 +136,7 @@ namespace ManagementApplication.Data
 
             var updateOrder = await query.ToArrayAsync();
 
-            if (updateOrder == null)
+            if (updateOrder.Length == 0)
             {
                 return null;
             }

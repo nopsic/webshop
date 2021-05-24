@@ -37,7 +37,15 @@ namespace ManagementApplication.View
         private void Create_Bill_Click(object sender, RoutedEventArgs e)
         {
             var selectedOrder = (sender as FrameworkElement).DataContext as Order;
-            _orderWindowViewModel.SendEmail(selectedOrder);
+
+            if(selectedOrder.Status == "Processed")
+            {
+                _orderWindowViewModel.SendEmail(selectedOrder);
+            }
+            else
+            {
+                MessageBox.Show("It is not a processed order yet!", "Error");
+            }
         }
     }
 }

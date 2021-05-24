@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementApplication.View"
         mc:Ignorable="d"
-        Title="Orders" Height="926" Width="1350" Background="#f7c64b">
+        Title="Orders" Height="926" Width="1600" Background="#f7c64b">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -61,9 +61,9 @@
             <Button Click="changeStatus_Click" x:Name="changeStatus" Content="Change status" HorizontalAlignment="Left" Margin="725,171,0,0" VerticalAlignment="Top" Width="130"/>
             <ComboBox Name="statusComboBox" HorizontalAlignment="Left" Margin="885,119,0,0" VerticalAlignment="Top" Width="120">
                 <ComboBox.Items>
-                    <ComboBoxItem>Requested</ComboBoxItem>
-                    <ComboBoxItem>InShop</ComboBoxItem>
-                    <ComboBoxItem>OurOfStock</ComboBoxItem>
+                    <ComboBoxItem>New</ComboBoxItem>
+                    <ComboBoxItem>Under Procurement</ComboBoxItem>
+                    <ComboBoxItem>Processed</ComboBoxItem>
                 </ComboBox.Items>
             </ComboBox>
         </Grid>
