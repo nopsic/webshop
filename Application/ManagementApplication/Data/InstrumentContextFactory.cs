@@ -14,7 +14,7 @@ namespace ManagementApplication.Data
 
             _configureDbContext(options);
 
-            options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=WebshopDB;Integrated Security=True;Connect Timeout=30;");
+            options.UseSqlServer("Data Source=tcp:nopsicwebshopdb.database.windows.net,1433;Initial Catalog=WebshopDB;User ID=nopsic;Password=H12d45h78d963;Connection Timeout=30;");
 
             return new InstrumentContext();
         }

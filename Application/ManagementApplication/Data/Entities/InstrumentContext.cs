@@ -15,7 +15,7 @@ namespace ManagementApplication.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=WebshopDB;Integrated Security=True;Connect Timeout=30;");
+            optionsBuilder.UseSqlServer("Data Source=tcp:nopsicwebshopdb.database.windows.net,1433;Initial Catalog=WebshopDB;User ID=nopsic;Password=H12d45h78d963;Connection Timeout=30;");
 
             base.OnConfiguring(optionsBuilder);
         }
