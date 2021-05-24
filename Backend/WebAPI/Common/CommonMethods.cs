@@ -49,7 +49,7 @@ namespace WebAPI.Common
             const string fromPassword = "Qwerty49";
             string subject = $"Order sent to the shop - #{orders[0].OrderNumber}";
 
-            string body = $"Thank you for your order, {orders[0].FirstName} {orders[0].LastName}!\n\nYour order was placed with:\n\n";
+            string body = $"Thank you for your order, {orders[0].FirstName} {orders[0].LastName}!\n\nOrder status: {orders[0].Status}\n\nYour order was placed with:\n\n";
 
             int total = 0;
 

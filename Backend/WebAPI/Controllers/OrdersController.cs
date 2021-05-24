@@ -95,7 +95,7 @@ namespace WebAPI.Controllers
                     order.BillingAddress = splittedData[3];
                     order.Date = DateTime.Now;
                     order.OrderNumber = orderNumber;
-                    order.Status = "Requested";
+                    order.Status = "New";
 
                     orders.Add(order);
                 }
