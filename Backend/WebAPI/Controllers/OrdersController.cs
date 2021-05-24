@@ -126,5 +126,24 @@ namespace WebAPI.Controllers
 
             return BadRequest();
         }
+
+        [HttpGet("{email}")]
+        public async Task<ActionResult<OrderModel[]>> GetByEmail(string email)
+        {
+            try
+            {
+                var result = await _repository.GetOrderByEmailAsync(email);
+                if (result == null)
+                {
+                    return null;
+                }
+
+                return _mapper.Map<OrderModel[]>(result);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
+        }
     }
 }
