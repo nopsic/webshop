@@ -26,8 +26,22 @@ namespace ManagementApplication.Data
         public async Task<Instrument[]> GetAllInstrumentsAsync()
         {
             IQueryable<Instrument> query = _context.Instruments;
+
+            // Query It
+            query = query.Select(p => new Instrument() 
+            {
+                InstrumentId = p.InstrumentId,
+                Name = p.Name,
+                Code = p.Code,
+                Price = p.Price,
+                Description = p.Description,
+                Rating = p.Rating,
+                Quantity = p.Quantity,
+                Type = p.Type
+            });
+
             // Order It
-            query = query.OrderBy(c => c.Name);
+            query = query.OrderBy(c => c.InstrumentId);
 
             return await query.ToArrayAsync();
         }

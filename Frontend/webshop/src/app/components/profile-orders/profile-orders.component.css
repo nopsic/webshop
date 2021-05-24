@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+  background-color:rgb(247, 198, 75);
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.empty {
+  background-color: rgb(247, 198, 75);
+  padding: 50px;
+  text-align: center
+}

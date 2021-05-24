@@ -30,6 +30,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { StarComponent } from './shared/star.component';
@@ -39,7 +40,6 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { OrderComponent } from './components/order/order.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -47,6 +47,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { DeleteDialogComponent } from './components/dialog/delete-dialog/delete-dialog.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ProfileOrdersComponent } from './components/profile-orders/profile-orders.component';
 
 export function tonkenGetter() {
   return sessionStorage.getItem("jwt");
@@ -77,7 +78,8 @@ const MaterialComponents = [
   MatBadgeModule,
   MatGridListModule,
   MatDividerModule,
-  MatListModule
+  MatListModule,
+  MatSnackBarModule
 ]
 
 @NgModule({
@@ -91,12 +93,12 @@ const MaterialComponents = [
     ProductComponent,
     ProductDetailComponent,
     RegistrationComponent,
-    OrderComponent,
     DialogComponent,
     LoginComponent,
     ProfileComponent,
     DeleteDialogComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ProfileOrdersComponent
   ],
   entryComponents: [DialogComponent],
   imports: [

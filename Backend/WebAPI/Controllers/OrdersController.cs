@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WebAPI.Common;
 using WebAPI.Data;
 using WebAPI.Data.Entities;
 using WebAPI.Models;
@@ -31,20 +32,30 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("{email}/{numberOfInstruments}")]
-        public async Task<ActionResult<Order[]>> Post([FromRoute] string email, [FromRoute] int numberOfInstruments, [FromBody] dynamic data)
+        [Route("{userData}/{numberOfInstruments}")]
+        public async Task<ActionResult<Order[]>> Post([FromRoute] string userData, [FromRoute] int numberOfInstruments, [FromBody] dynamic data)
         {
             try
             {
                 List<Order> orders = new List<Order>();
                 List<Instrument> instruments = new List<Instrument>();
 
-                var user = await _repository.GetRegisteredUserAsync(email);
+                var splittedUserData = userData.Split(";");
+
+                string email = splittedUserData[0];
+                string firstName = splittedUserData[1];
+                string lastName = splittedUserData[2];
+
+                UserData user = await _repository.GetRegisteredUserAsync(email);
 
                 if (user == null)
                 {
-                    return NotFound();
+                    user = new UserData();
+                    user.Email = email;
+                    user.FirstName = firstName;
+                    user.LastName = lastName;
                 }
+
 
                 for (int i = 0;  i < numberOfInstruments; i++)
                 {
@@ -66,7 +77,7 @@ namespace WebAPI.Controllers
 
                 string addressData = data[numberOfInstruments].ToString();
 
-               var splittedData = addressData.Split(";");
+                var splittedData = addressData.Split(";");
 
                 for (int i = 0; i < instruments.Count; i++)
                 {
@@ -96,6 +107,14 @@ namespace WebAPI.Controllers
 
                 if (await _repository.SaveChangesAsync())
                 {
+                    foreach (var item in orders)
+                    {
+                        var instrument = await _repository.GetInstrumentAsync(item.Code);
+                        instrument.Quantity -= item.Quantity;
+                        await _repository.SaveChangesAsync();
+                    }
+
+                    CommonMethods.SendEmail(orders.ToArray());
                     return Created("", _mapper.Map<OrderModel[]>(orders));
                 }
 
@@ -106,6 +125,25 @@ namespace WebAPI.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpGet("{email}")]
+        public async Task<ActionResult<OrderModel[]>> GetByEmail(string email)
+        {
+            try
+            {
+                var result = await _repository.GetOrderByEmailAsync(email);
+                if (result == null)
+                {
+                    return null;
+                }
+
+                return _mapper.Map<OrderModel[]>(result);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IProduct } from './product';
 import { ProductService } from "../../services/product.service";
@@ -30,7 +30,7 @@ export class ProductComponent implements OnInit {
   value = 'Search here';
   errorMessage: string = '';
   sub!: Subscription;
-  displayedColumns: string[] = ['pictureName', 'name', 'code', 'price'];
+  displayedColumns: string[] = ['pictureName', 'name', 'code', 'rating', 'price'];
 
   searchProduct: IProduct = {    
     instrumentId: 0,
@@ -73,7 +73,6 @@ export class ProductComponent implements OnInit {
     this.sub = this.productService.getProducts().subscribe({
       next: products => {
         this.products = products;
-        console.log(this.products[0].image);
         this.dataSource = new MatTableDataSource(this.products);
         this.dataSource.paginator = this.paginator.toArray()[0];
         this.dataSource.sort = this.sort.toArray()[0];

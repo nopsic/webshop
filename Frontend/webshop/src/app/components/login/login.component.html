@@ -4,7 +4,6 @@
 <mat-grid-list cols="5" class="grids">
    <mat-grid-tile colspan="1" class="side"></mat-grid-tile>
    <mat-grid-tile colspan="3" class="middle">
-      <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username or password</div>
       <mat-card>
          <mat-card-content>
             <form class="form" [formGroup]="loginForm">

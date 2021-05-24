@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 function notTheSameControlValues(controlName1: string, controlName2: string){
   return (formGroup: FormGroup) => {
@@ -30,7 +31,8 @@ export class RegistrationComponent implements OnInit {
   emailInput: string = '';
   showProgress: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -69,10 +71,16 @@ export class RegistrationComponent implements OnInit {
     this.http.post(`${environment.apiURL}` + "/api/customers/register", userData)
       .subscribe( response => {
         this.showProgress = false;
-          this.router.navigate(["/"]);
-          window.alert("Your registration was successful!");
+        this.router.navigate(["/"]);
+        let config = new MatSnackBarConfig();
+        config.panelClass = ["success-style"];
+        config.duration = 3000;
+        this.snackBar.open("Your registration was successful!", "Close", config);
       }, err => {
-        window.alert("This email has been already registered");
+        this.showProgress = false;
+        let config = new MatSnackBarConfig();
+        config.panelClass = ["custom-style"];
+        this.snackBar.open("This email has been already registered", "Close", config);
       })
   }
 }

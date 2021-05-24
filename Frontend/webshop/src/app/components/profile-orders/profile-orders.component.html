@@ -1,0 +1,50 @@
+<mat-card class="progress-bar" *ngIf="showProgress">
+  <mat-card-content>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-content>
+</mat-card>
+<div class="empty" *ngIf="orders.length === 0"><h2>You have no placed order yet!</h2></div>
+<div class="mat-elevation-z8" *ngIf="orders.length !== 0">
+  <table mat-table matTableFilter [dataSource]="dataSource" matSort> 
+    
+    
+    <!-- Instrument name Column -->
+    <ng-container matColumnDef="instrumentName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Instrument name </th>
+      <td mat-cell *matCellDef="let element">{{element.instrumentName}}</td>
+    </ng-container>
+  
+    <!-- Code Column -->
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+      <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+    </ng-container>
+   
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.price | currency:'HUF':'symbol':'1.2-2'}} </td>
+    </ng-container>
+    
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+    </ng-container>
+
+    <!-- Order number Column -->
+    <ng-container matColumnDef="orderNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Order number </th>
+      <td mat-cell *matCellDef="let element"> {{element.orderNumber}} </td>
+    </ng-container>
+
+    <!-- Order number Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Order status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
