@@ -73,7 +73,6 @@ export class ProductComponent implements OnInit {
     this.sub = this.productService.getProducts().subscribe({
       next: products => {
         this.products = products;
-        console.log(this.products[0].image);
         this.dataSource = new MatTableDataSource(this.products);
         this.dataSource.paginator = this.paginator.toArray()[0];
         this.dataSource.sort = this.sort.toArray()[0];
