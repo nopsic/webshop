@@ -32,9 +32,6 @@ namespace ManagementApplication.View
         {
             var selectedProductToEdit = (sender as FrameworkElement).DataContext as Instrument;
             _instrumentWindowViewModel.ChangeSelectedInstrument(selectedProductToEdit);
-
-            BitmapImage bitmap = _instrumentWindowViewModel.GetImage(selectedProductToEdit.Image);
-            UpdateImage.Source = bitmap;
         }
 
         private void Image_Button_Click(object sender, RoutedEventArgs e)
@@ -47,7 +44,6 @@ namespace ManagementApplication.View
                 Uri fileUri = new Uri(dialog.FileName);
                 _instrumentWindowViewModel.SaveImage(fileUri);
                 BitmapImage bitmap = new BitmapImage(fileUri);
-                SelectedImage.Source = bitmap;
             }
         }
 
@@ -61,7 +57,6 @@ namespace ManagementApplication.View
                 Uri fileUri = new Uri(dialog.FileName);
                 _instrumentWindowViewModel.UpdateImage(fileUri);
                 BitmapImage bitmap = new BitmapImage(fileUri);
-                UpdateImage.Source = bitmap;
             }
         }
     }

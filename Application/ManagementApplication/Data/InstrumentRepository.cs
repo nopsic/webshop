@@ -90,7 +90,7 @@ namespace ManagementApplication.Data
             }
 
             if (instrument.Name == "" || instrument.Code == "" || instrument.Price < 0 || instrument.Description == ""
-                || instrument.Rating < 0 || instrument.Quantity < 0 || instrument.Type == "" || instrument.Image == null)
+                || instrument.Rating < 0 || instrument.Quantity < 0 || instrument.Type == "")
             {
                 return null;
             }
@@ -102,7 +102,10 @@ namespace ManagementApplication.Data
             toUpdate.Description = instrument.Description;
             toUpdate.Rating = instrument.Rating;
             toUpdate.Quantity = instrument.Quantity;
-            toUpdate.Image = instrument.Image;
+            if (instrument.Image != null)
+            {
+                toUpdate.Image = instrument.Image;
+            }
             toUpdate.Type = instrument.Type;
 
             return toUpdate;

@@ -103,9 +103,6 @@
                         <Button Command="{Binding NewInstrumentClickCommand}" Grid.Row="8" Grid.ColumnSpan="2" Content="Add" Margin="5"/>
 
                     </Grid>
-
-                    <Image x:Name="SelectedImage" Width="100"></Image>
-
                 </StackPanel>
             </Border>
 
@@ -159,9 +156,6 @@
                         <Button Command="{Binding UpdateCommand}" Grid.Row="8" Grid.ColumnSpan="2" Content="Update" Margin="5"/>
 
                     </Grid>
-
-                    <Image x:Name="UpdateImage" Width="100"></Image>
-
                 </StackPanel>
             </Border>
 
