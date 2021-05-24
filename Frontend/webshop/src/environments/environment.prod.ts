@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: 'http://localhost:6600'
+  apiURL: 'https://nopsicwebshopapi.azurewebsites.net'
 };
