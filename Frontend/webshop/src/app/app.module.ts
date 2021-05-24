@@ -47,6 +47,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { DeleteDialogComponent } from './components/dialog/delete-dialog/delete-dialog.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ProfileOrdersComponent } from './components/profile-orders/profile-orders.component';
 
 export function tonkenGetter() {
   return sessionStorage.getItem("jwt");
@@ -96,7 +97,8 @@ const MaterialComponents = [
     LoginComponent,
     ProfileComponent,
     DeleteDialogComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ProfileOrdersComponent
   ],
   entryComponents: [DialogComponent],
   imports: [
