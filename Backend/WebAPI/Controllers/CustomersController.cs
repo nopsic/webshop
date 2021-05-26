@@ -35,12 +35,6 @@ namespace WebAPI.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet, Authorize]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "Test Elek", "Still Works" };
-        }
-
         [HttpPost]
         [Route("login")]
         public async Task<ActionResult> Login([FromBody] LoginModel user)
