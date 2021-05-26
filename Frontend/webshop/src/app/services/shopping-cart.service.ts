@@ -25,7 +25,7 @@ export class ShoppingCartService {
         return;
       }
     });
-    
+
     if (!found) {
       this.cartItems.push(product);
       let numberOfInstruments = Number(sessionStorage.getItem("instrumentQuantity"));
@@ -55,7 +55,6 @@ export class ShoppingCartService {
         sessionStorage.setItem("instrumentQuantity", numberOfInstruments.toString());
 
         this.cartItems = this.removeFunction(this.cartItems, element);
-        //this.cartItems = this.cartItems.splice(index, 1);
       }
     });
   }
