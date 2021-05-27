@@ -95,6 +95,7 @@ namespace ManagementApplication.ViewModel
 
             if (NewInstrument.Image == null)
             {
+                MessageBox.Show("Need to add an image", "Error");
                 return;
             }
 
@@ -114,6 +115,7 @@ namespace ManagementApplication.ViewModel
 
             if (existing == null)
             {
+                MessageBox.Show("Can't delete the instrument", "Error");
                 return;
             }
 
