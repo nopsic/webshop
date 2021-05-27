@@ -5,7 +5,6 @@ namespace ManagementApplication.Data
     public class InstrumentContext : DbContext
     {
         public DbSet<Instrument> Instruments { get; set; }
-        public DbSet<UserData> Users { get; set; }
         public DbSet<Order> Orders { get; set; }
 
         public InstrumentContext()
