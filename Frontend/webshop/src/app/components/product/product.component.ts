@@ -5,7 +5,6 @@ import { ProductService } from "../../services/product.service";
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { Router } from '@angular/router';
 import { MatTableFilter } from 'mat-table-filter';
 
 export class Product {
@@ -28,11 +27,13 @@ export class Product {
 export class ProductComponent implements OnInit {
   pageTitle: string = "List of musical instruments";
   value = 'Search here';
+  minPrice: number = null;
+  maxPrice: number = null;
   errorMessage: string = '';
   sub!: Subscription;
   displayedColumns: string[] = ['pictureName', 'name', 'code', 'rating', 'price'];
 
-  searchProduct: IProduct = {    
+  searchProduct: IProduct = {
     instrumentId: 0,
     name: '',
     code: '',
@@ -44,11 +45,13 @@ export class ProductComponent implements OnInit {
     quantity: 0
   };
 
+  activeTab = 0;
+
 
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
 
-  filterEntity: Product = {    
+  filterEntity: Product = {
     instrumentId: '',
     name: '',
     code: '',
@@ -65,8 +68,7 @@ export class ProductComponent implements OnInit {
 
   showMatProgress: boolean = false;
 
-  constructor(private productService: ProductService,
-              private router: Router) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.showMatProgress = true;
@@ -84,14 +86,33 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string): void {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
+  setNullMin() {
+    this.minPrice = null;
+    this.applyPriceFilter();
   }
 
-  logData(row): void {
-    console.log(row);
+  setNullMax() {
+    this.maxPrice = null;
+    this.applyPriceFilter();
+  }
+
+  applyPriceFilter() {
+    this.dataSource = new MatTableDataSource(this.products);
+    this.dataSource.paginator = this.paginator.toArray()[this.activeTab];
+    this.dataSource.sort = this.sort.toArray()[this.activeTab];
+
+    if (this.minPrice === null && this.maxPrice === null) {
+      return;
+    }
+    else if((this.minPrice === null ||  this.minPrice.toString().length === 0) && this.maxPrice !== null && this.maxPrice.toString().length !== 0) {
+      this.dataSource.data = this.dataSource.data.filter(e => e.price < (Number(this.maxPrice) + 1));
+    }
+    else if (this.minPrice !== null && (this.maxPrice === null || this.maxPrice.toString().length === 0) && this.minPrice.toString().length !== 0) {
+      this.dataSource.data = this.dataSource.data.filter(e => e.price > this.minPrice - 1);
+    }
+    else if(this.minPrice !== null && this.maxPrice !== null && this.minPrice.toString().length !== 0 && this.maxPrice.toString().length !== 0) {
+      this.dataSource.data = this.dataSource.data.filter(e => e.price < (Number(this.maxPrice) + 1) && e.price > this.minPrice - 1);
+    }
   }
 
   showProductTable(): boolean {
@@ -108,6 +129,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProductsBySelectedTab(tabIndex: number) {
+    this.activeTab = tabIndex;
     if(tabIndex == 0) {
       this.showMatProgress = true;
       this.dataSource = new MatTableDataSource([]);
@@ -120,6 +142,7 @@ export class ProductComponent implements OnInit {
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
+          this.applyPriceFilter();
         },
         error: err => {
           this.errorMessage = err;
@@ -139,6 +162,7 @@ export class ProductComponent implements OnInit {
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
+          this.applyPriceFilter();
         },
         error: err => {
           this.errorMessage = err;
@@ -158,6 +182,7 @@ export class ProductComponent implements OnInit {
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
+          this.applyPriceFilter();
         },
         error: err => {
           this.errorMessage = err;
@@ -177,6 +202,7 @@ export class ProductComponent implements OnInit {
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
+          this.applyPriceFilter();
         },
         error: err => {
           this.errorMessage = err;
@@ -196,6 +222,7 @@ export class ProductComponent implements OnInit {
           this.filterEntity = new Product();
           this.filterType = MatTableFilter.ANYWHERE;
           this.showMatProgress = false;
+          this.applyPriceFilter();
         },
         error: err => {
           this.errorMessage = err;
