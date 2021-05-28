@@ -29,6 +29,8 @@ export class ProductComponent implements OnInit {
   value = 'Search here';
   minPrice: number = null;
   maxPrice: number = null;
+  minRating: number = null;
+  maxRating: number = null;
   errorMessage: string = '';
   sub!: Subscription;
   displayedColumns: string[] = ['pictureName', 'name', 'code', 'rating', 'price'];
@@ -96,13 +98,38 @@ export class ProductComponent implements OnInit {
     this.applyPriceFilter();
   }
 
+  setMinRatingNull() {
+    this.minRating = null;
+    this.applyPriceFilter();
+  }
+
+  setMaxRatingNull() {
+    this.maxRating = null;
+    this.applyPriceFilter();
+  }
+
+  applyRatingFilter() {
+    if (this.minRating === null && this.maxRating === null) {
+
+    }
+    else if((this.minRating === null ||  this.minRating.toString().length === 0) && this.maxRating !== null && this.maxRating.toString().length !== 0) {
+      this.dataSource.data = this.dataSource.data.filter(e => e.rating <= this.maxRating);
+    }
+    else if (this.minRating !== null && (this.maxRating === null || this.maxRating.toString().length === 0) && this.minRating.toString().length !== 0) {
+      this.dataSource.data = this.dataSource.data.filter(e => e.rating >= this.minRating);
+    }
+    else if(this.minRating !== null && this.maxRating !== null && this.minRating.toString().length !== 0 && this.maxRating.toString().length !== 0) {
+      this.dataSource.data = this.dataSource.data.filter(e => (e.rating < Number(this.maxRating) + 0.1) && (e.rating > this.minRating - 0.1));
+    }
+  }
+
   applyPriceFilter() {
     this.dataSource = new MatTableDataSource(this.products);
     this.dataSource.paginator = this.paginator.toArray()[this.activeTab];
     this.dataSource.sort = this.sort.toArray()[this.activeTab];
 
     if (this.minPrice === null && this.maxPrice === null) {
-      return;
+
     }
     else if((this.minPrice === null ||  this.minPrice.toString().length === 0) && this.maxPrice !== null && this.maxPrice.toString().length !== 0) {
       this.dataSource.data = this.dataSource.data.filter(e => e.price < (Number(this.maxPrice) + 1));
@@ -113,6 +140,8 @@ export class ProductComponent implements OnInit {
     else if(this.minPrice !== null && this.maxPrice !== null && this.minPrice.toString().length !== 0 && this.maxPrice.toString().length !== 0) {
       this.dataSource.data = this.dataSource.data.filter(e => e.price < (Number(this.maxPrice) + 1) && e.price > this.minPrice - 1);
     }
+
+    this.applyRatingFilter();
   }
 
   showProductTable(): boolean {
