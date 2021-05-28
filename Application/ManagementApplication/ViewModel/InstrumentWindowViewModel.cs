@@ -165,24 +165,6 @@ namespace ManagementApplication.ViewModel
             NewInstrument.Image = image;
         }
 
-        public BitmapImage GetImage(byte[] array)
-        {
-            if (array == null)
-            {
-                return null;
-            }
-
-            using (var ms = new MemoryStream(array))
-            {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad; // here
-                image.StreamSource = ms;
-                image.EndInit();
-                return image;
-            }
-        }
-
         public void UpdateImage(Uri uri)
         {
             byte[] image = null;

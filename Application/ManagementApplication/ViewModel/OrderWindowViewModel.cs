@@ -1,14 +1,10 @@
-﻿using FluentEmail.Core;
-using FluentEmail.Smtp;
-using ManagementApplication.Data;
+﻿using ManagementApplication.Data;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -89,6 +85,7 @@ namespace ManagementApplication.ViewModel
 
             if (order == null)
             {
+                MessageBox.Show("There no order with this number", "Error");
                 return;
             }
             else 

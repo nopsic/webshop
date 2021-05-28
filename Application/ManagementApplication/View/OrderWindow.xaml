@@ -36,7 +36,7 @@
                 <DataGridTemplateColumn Header="Edit Status">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="Edite_Selected_Order" Content="Edit Status"/>
+                            <Button Click="Edite_Selected_Order" Content="Select to edit status"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
